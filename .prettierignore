@@ -1,0 +1,13 @@
+
+# folders
+node_modules
+dist
+.next
+public
+
+# testing
+coverage
+
+# yaml
+pnpm-lock.yaml
+
