@@ -5,14 +5,16 @@
   --color-foreground: var(--foreground);
   --font-primary: 'Cantarell', sans-serif;
   --font-secondary: 'Roboto', sans-serif;
-  --text-large: 20px;
-  --text-medium: 16px;
-  --text-small: 14px;
-  --text-tiny: 12px;
-  --text-mobile-large: 14px;
-  --text-mobile-medium: 12px;
-  --text-mobile-small: 10px;
-  --text-mobile-tiny: 8px;
+  --text-5xl: 64px;
+  --text-4xl: 48px;
+  --text-3xl: 32px;
+  --text-2xl: 24px;
+  --text-xl: 20px;
+  --text-lg: 16px;
+  --text-md: 14px;
+  --text-base: 12px;
+  --text-sm: 10px;
+  --text-xs: 8px;
   --font-semibold: 700;
   --color-primary-default: #1A5319;
   --color-primary-lighter: #508D4E;
@@ -44,38 +46,38 @@
   }
 
   h1 {
-    font-size: 64px;
+    font-size: var(--text-5xl);
   }
 
   h2 {
-    font-size: 48px;
+    font-size: var(--text-4xl);
   }
 
   h3 {
-    font-size: 32px;
+    font-size: var(--text-3xl);
   }
 
   p {
-    font-size: 20px;
+    font-size: var(--text-xl);
     font-weight: 400;
     font-family: var(--font-secondary);
   }
   
   @media (max-width: 768px) {
     h1 {
-      font-size: 24px;
+      font-size: var(--text-2xl);
     }
 
     h2 {
-      font-size: 20px;
+      font-size: var(--text-xl);
     }
 
     h3 {
-      font-size: 16px;
+      font-size: var(--text-lg);
     }
 
     p {
-      font-size: 14px;
+      font-size: var(--text-md);
     }
   }
 }
