@@ -3,40 +3,98 @@
 @theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --font-primary: 'Cantarell', sans-serif;
+  --font-secondary: 'Roboto', sans-serif;
+  --text-large: 20px;
+  --text-medium: 16px;
+  --text-small: 14px;
+  --text-tiny: 12px;
+  --text-mobile-large: 14px;
+  --text-mobile-medium: 12px;
+  --text-mobile-small: 10px;
+  --text-mobile-tiny: 8px;
+  --font-semibold: 700;
+  --color-primary-default: #1A5319;
+  --color-primary-lighter: #508D4E;
+  --color-primary-lighterer: #80AF81;
+  --color-primary-lightest: #D6EFD8;
+  --color-black-default: #282828;
+  --color-black-lighter: #949494;
+  --color-black-lightest: #EAEAEA;
+  --color-white-default: #FEFEFE;
+  --color-white-darker: #F8F8F8;
+  --color-white-darkest: #F1F1F1;
 }
 
-/*
-  The default border color has changed to `currentColor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
 @layer base {
   *,
   ::after,
   ::before,
   ::backdrop,
   ::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
+    border-color: var(--color-black-lighter, currentColor);
+  }
+
+  h1 {
+    font-size: 64px;
+    font-weight: var(--font-semibold);
+    font-family: var(--font-primary);
+    color: var(--color-black-default);
+  }
+
+  h2 {
+    font-size: 48px;
+    font-weight: var(--font-semibold);
+    font-family: var(--font-primary);
+    color: var(--color-black-default);
+  }
+
+  h3 {
+    font-size: 32px;
+    font-weight: var(--font-semibold);
+    font-family: var(--font-primary);
+    color: var(--color-black-default);
+  }
+
+  p {
+    font-size: 20px;
+    font-weight: 400;
+    font-family: var(--font-secondary);
+  }
+  
+  @media screen and (max-width: 768px) {
+    h1 {
+      font-size: 24px;
+    }
+
+    h2 {
+      font-size: 20px;
+    }
+
+    h3 {
+      font-size: 16px;
+    }
+
+    p {
+      font-size: 14px;
+    }
   }
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: var(--color-white-default);
+  --foreground: var(--color-black-default);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: var(--color-black-default);
+    --foreground: var(--color-white-default);
   }
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Roboto, Cantarell, sans-serif;
 }
