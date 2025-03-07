@@ -1,0 +1,81 @@
+generator client {
+  provider        = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+}
+
+model User {
+  id            Int             @id @default(autoincrement())
+  email         String          @unique
+  firstName     String?
+  lastName      String?
+  aboutMe       String?
+  profileImage  String?
+  allergens     String[]
+  role          String
+  recipes       Recipe[]
+  userFavorites UserFavorites[]
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+}
+
+model Recipe {
+  id              Int             @id @default(autoincrement())
+  name            String
+  photo           String?
+  cookingTime     Int
+  description     String
+  calories        Int?
+  favouritesTotal Int             @default(0)
+  difficulty      String?
+  status          String
+  ingredients     Ingredient[]
+  tags            RecipeTag[]
+  userFavorites   UserFavorites[]
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  userId Int  @unique
+  user   User @relation(fields: [userId], references: [id])
+}
+
+model Ingredient {
+  id        Int @id @default(autoincrement())
+  foodId    Int
+  servingId Int
+  quantity  Int
+
+  recipeId Int    @unique
+  recipe   Recipe @relation(fields: [recipeId], references: [id])
+}
+
+model Tag {
+  id        Int         @id @default(autoincrement())
+  name      String
+  include   String[]
+  exclude   String[]
+  recipeTag RecipeTag[]
+}
+
+model RecipeTag {
+  recipeId Int
+  recipe   Recipe @relation(fields: [recipeId], references: [id])
+
+  tagId Int
+  tag   Tag @relation(fields: [tagId], references: [id])
+
+  @@id([recipeId, tagId])
+}
+
+model UserFavorites {
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
+
+  recipeId Int
+  recipe   Recipe @relation(fields: [recipeId], references: [id])
+
+  @@id([userId, recipeId])
+}
