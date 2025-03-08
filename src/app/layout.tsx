@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono, Cantarell, Roboto } from 'next/font/google'
+import { Cantarell, Roboto } from 'next/font/google'
 import './globals.css'
 
 const cantarellSans = Cantarell({
@@ -26,7 +26,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${cantarellSans.variable} ${robotoSans.variable} antialiased`}>{children}</body>
+      <body className={`${cantarellSans.variable} ${robotoSans.variable} antialiased`}>
+        {children}
+      </body>
     </html>
   )
 }

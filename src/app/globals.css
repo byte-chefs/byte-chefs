@@ -16,16 +16,16 @@
   --text-sm: 10px;
   --text-xs: 8px;
   --font-semibold: 700;
-  --color-primary-default: #1A5319;
-  --color-primary-lighter: #508D4E;
-  --color-primary-lighterer: #80AF81;
-  --color-primary-lightest: #D6EFD8;
+  --color-primary-default: #1a5319;
+  --color-primary-lighter: #508d4e;
+  --color-primary-lighterer: #80af81;
+  --color-primary-lightest: #d6efd8;
   --color-black-default: #282828;
   --color-black-lighter: #949494;
-  --color-black-lightest: #EAEAEA;
-  --color-white-default: #FEFEFE;
-  --color-white-darker: #F8F8F8;
-  --color-white-darkest: #F1F1F1;
+  --color-black-lightest: #eaeaea;
+  --color-white-default: #fefefe;
+  --color-white-darker: #f8f8f8;
+  --color-white-darkest: #f1f1f1;
 }
 
 @layer base {
@@ -62,7 +62,7 @@
     font-weight: 400;
     font-family: var(--font-secondary);
   }
-  
+
   @media (max-width: 768px) {
     h1 {
       font-size: var(--text-2xl);
