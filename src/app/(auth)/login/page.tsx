@@ -1,4 +1,5 @@
-import { login, signup } from './actions'
+import { loginAction } from '@/actions/auth/loginAction'
+import { signupAction } from '@/actions/auth/signupAction'
 
 export default function LoginPage() {
   return (
@@ -34,13 +35,13 @@ export default function LoginPage() {
 
         <div className="flex space-x-2">
           <button
-            formAction={login}
+            formAction={loginAction}
             className="w-1/2 rounded-lg bg-gray-600 py-2 font-semibold text-white transition hover:bg-gray-500"
           >
             Log in
           </button>
           <button
-            formAction={signup}
+            formAction={signupAction}
             className="w-1/2 rounded-lg bg-gray-700 py-2 font-semibold text-white transition hover:bg-gray-600"
           >
             Sign up
