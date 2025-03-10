@@ -87,7 +87,7 @@
   --foreground: var(--color-black-default);
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   :root {
     --background: var(--color-black-default);
     --foreground: var(--color-white-default);
