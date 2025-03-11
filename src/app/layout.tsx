@@ -1,3 +1,4 @@
+import Header from '@/components/common/Header'
 import type { Metadata } from 'next'
 import { Cantarell, Roboto } from 'next/font/google'
 import './globals.css'
@@ -26,7 +27,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${cantarellSans.variable} ${robotoSans.variable} antialiased`}>
+      <body
+        className={`${cantarellSans.variable} ${robotoSans.variable} pt-15 antialiased md:pt-20`}
+      >
+        <Header />
         {children}
       </body>
     </html>
