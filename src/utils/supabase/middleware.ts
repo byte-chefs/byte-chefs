@@ -38,12 +38,7 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser()
 
-  if (
-    !user &&
-    !PUBLIC_ROUTES.some((route) => request.nextUrl.pathname.startsWith(route)) &&
-    !/^\/recipes\/\d+\/edit/.test(request.nextUrl.pathname) &&
-    !request.nextUrl.pathname.startsWith(ROUTES.CREATE_RECIPE)
-  ) {
+  if (!user && !PUBLIC_ROUTES.some((route) => request.nextUrl.pathname.startsWith(route))) {
     // no user, potentially respond by redirecting the user to the login page
     const url = request.nextUrl.clone()
     url.pathname = '/login'

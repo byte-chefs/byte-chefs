@@ -2,7 +2,7 @@ const ROUTES = {
   LOGIN: '/login',
   FAVOURITES: '/favourites',
   MY_RECIPES: '/my-recipes',
-  CREATE_RECIPE: '/recipes/create',
+  RECIPE: '/recipe',
   RANK: '/rank',
   RECIPES: '/recipes',
   TAG: '/tags',
