@@ -1,4 +1,4 @@
-import { PUBLIC_ROUTES } from '@/app/constants/routes'
+import ROUTES, { PUBLIC_ROUTES } from '@/app/constants/routes'
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
@@ -38,7 +38,12 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser()
 
-  if (!user && !PUBLIC_ROUTES.some((route) => request.nextUrl.pathname.startsWith(route))) {
+  if (
+    !user &&
+    !PUBLIC_ROUTES.some((route) => request.nextUrl.pathname.startsWith(route)) &&
+    !/^\/recipes\/\d+\/edit/.test(request.nextUrl.pathname) &&
+    !request.nextUrl.pathname.startsWith(ROUTES.CREATE_RECIPE)
+  ) {
     // no user, potentially respond by redirecting the user to the login page
     const url = request.nextUrl.clone()
     url.pathname = '/login'
