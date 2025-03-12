@@ -1,4 +1,4 @@
-import ROUTES, { PUBLIC_ROUTES } from '@/app/constants/routes'
+import { PUBLIC_ROUTES } from '@/app/constants/routes'
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
