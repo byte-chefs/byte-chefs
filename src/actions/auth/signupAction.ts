@@ -2,6 +2,7 @@
 
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
+import { getOrCreateUser } from '@/actions/user/getOrCreateUser'
 
 import { createClient } from '@/utils/supabase/server'
 
@@ -18,6 +19,12 @@ export async function signupAction(formData: FormData) {
   const { error } = await supabase.auth.signUp(data)
 
   if (error) {
+    redirect('/error')
+  }
+
+  const user = await getOrCreateUser()
+
+  if (!user) {
     redirect('/error')
   }
 
