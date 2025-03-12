@@ -1,4 +1,4 @@
-export type Recipes = Array<{
+export type Recipe = {
   id: number
   name: string
   description: string
@@ -11,4 +11,14 @@ export type Recipes = Array<{
   difficulty: string | null
   status: string
   userId: number
-}>
+}
+
+export type Recipes = Array<Recipe>
+
+export type RecipeCardProps = {
+  recipe: Recipe
+}
+
+export type RecipeListProps = {
+  recipes: Recipes
+}
