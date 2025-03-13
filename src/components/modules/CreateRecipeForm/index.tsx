@@ -4,8 +4,8 @@
 
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
-import * as yup from 'yup'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
 import { createRecipeAction } from '@/actions/recipe/createRecipeAction'
 
 type CreateRecipeDTO = {
@@ -14,13 +14,11 @@ type CreateRecipeDTO = {
   description: string
 }
 
-const schema = yup
-  .object({
-    name: yup.string().required('Recipe name is required'),
-    cookingTime: yup.number().positive().integer().required('Cooking time is required'),
-    description: yup.string().required('Description is required'),
-  })
-  .required()
+const schema = z.object({
+  name: z.string().min(1, 'Recipe name is required'),
+  cookingTime: z.number().int().positive().min(1, 'Cooking time is required'),
+  description: z.string().min(1, 'Description is required'),
+})
 
 const CreateRecipeForm = () => {
   const {
@@ -28,7 +26,7 @@ const CreateRecipeForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<CreateRecipeDTO>({
-    resolver: yupResolver(schema),
+    resolver: zodResolver(schema),
   })
 
   const onSubmit = async (data: CreateRecipeDTO) => {
