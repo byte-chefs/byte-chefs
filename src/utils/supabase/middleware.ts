@@ -1,4 +1,4 @@
-import { PUBLIC_ROUTES } from '@/app/constants/routes'
+import ROUTES, { PUBLIC_ROUTES } from '@/app/constants/routes'
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
@@ -41,7 +41,16 @@ export async function updateSession(request: NextRequest) {
   if (!user && !PUBLIC_ROUTES.some((route) => request.nextUrl.pathname.startsWith(route))) {
     // no user, potentially respond by redirecting the user to the login page
     const url = request.nextUrl.clone()
-    url.pathname = '/login'
+    url.pathname = ROUTES.LOGIN
+    return NextResponse.redirect(url)
+  }
+
+  if (
+    (user && request.nextUrl.pathname.startsWith(ROUTES.LOGIN)) ||
+    request.nextUrl.pathname === ROUTES.HOMEPAGE
+  ) {
+    const url = request.nextUrl.clone()
+    url.pathname = ROUTES.RECIPES
     return NextResponse.redirect(url)
   }
 
