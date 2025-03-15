@@ -1,5 +1,7 @@
 @import 'tailwindcss';
 
+@variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 @theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -42,7 +44,6 @@
   h3 {
     font-weight: var(--font-semibold);
     font-family: var(--font-primary);
-    color: var(--color-black-default);
   }
 
   h1 {
@@ -85,10 +86,8 @@
 :root {
   --background: var(--color-white-default);
   --foreground: var(--color-black-default);
-}
 
-@media (prefers-color-scheme: light) {
-  :root {
+  &[data-theme='dark'] {
     --background: var(--color-black-default);
     --foreground: var(--color-white-default);
   }
@@ -96,6 +95,6 @@
 
 body {
   color: var(--foreground);
-  background: var(--background);
+  background-color: var(--background);
   font-family: Roboto, Cantarell, sans-serif;
 }
