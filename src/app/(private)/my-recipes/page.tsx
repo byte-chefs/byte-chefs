@@ -1,19 +1,22 @@
 import { getUserRecipes } from '@/actions/recipes/getUserRecipes'
+import Pagination from '@/components/common/Pagination'
 import RecipeList from '@/components/recipes/RecipeList'
-import { Recipes } from '@/types'
+import { TProps } from '@/types/pageProps'
 
-export const revalidate = 10
+export const revalidate = 60
 
-export default async function MyRecepiesPage() {
-  const data: Recipes = await getUserRecipes()
+export default async function MyRecepiesPage(props: TProps) {
+  const { data, totalPages } = await getUserRecipes(props.searchParams || {})
+
   return (
     <main>
-      <div className="min-h-screen w-full bg-gray-900 px-4 py-12 text-white sm:px-6 lg:px-8">
+      <div className="min-h-screen w-full px-4 py-12 sm:px-6 lg:px-8 dark:bg-gray-900">
         <div className="mx-auto max-w-4xl">
-          <h1 className="mb-8 text-center text-3xl font-semibold text-gray-100">
+          <h1 className="mb-8 text-center text-3xl font-semibold dark:text-gray-100">
             My recipes listing
           </h1>
           <RecipeList recipes={data} />
+          <Pagination totalPages={totalPages} />
         </div>
       </div>
     </main>
