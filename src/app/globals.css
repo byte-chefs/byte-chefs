@@ -63,7 +63,7 @@
     font-family: var(--font-secondary);
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 992px) {
     h1 {
       font-size: var(--text-2xl);
     }
@@ -87,7 +87,7 @@
   --foreground: var(--color-black-default);
 }
 
-@media (prefers-color-scheme: light) {
+@media (prefers-color-scheme: dark) {
   :root {
     --background: var(--color-black-default);
     --foreground: var(--color-white-default);
