@@ -1,7 +1,6 @@
 'use server'
 
-import { PrismaClient } from '@prisma/client'
-
+import { prisma } from '@/lib/prisma'
 import { getUserInfo } from '@/actions/auth/getUserInfo'
 
 type CreateRecipeDTO = {
@@ -12,7 +11,6 @@ type CreateRecipeDTO = {
 
 export async function createRecipeAction(formData: CreateRecipeDTO) {
   const { name, cookingTime, description } = formData
-  const prisma = new PrismaClient()
 
   const user = await getUserInfo()
 

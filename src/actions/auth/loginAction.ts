@@ -1,26 +1,26 @@
 'use server'
 
-import { revalidatePath } from 'next/cache'
-import { redirect } from 'next/navigation'
-
+import { flattenValidationErrors } from 'next-safe-action'
+import { actionClient } from '@/lib/safe-action'
 import { createClient } from '@/utils/supabase/server'
+import { loginSchema } from '@/schemas/auth/loginSchema'
+import { SupabaseError } from '@/lib/errors/supabase-error'
 
-export async function loginAction(formData: FormData) {
-  const supabase = await createClient()
+export const loginAction = actionClient
+  .schema(loginSchema, {
+    handleValidationErrorsShape: async (ve) => flattenValidationErrors(ve).fieldErrors,
+  })
+  .action(async ({ parsedInput }) => {
+    try {
+      const supabase = await createClient()
 
-  // type-casting here for convenience
-  // in practice, you should validate your inputs
-  const data = {
-    email: formData.get('email') as string,
-    password: formData.get('password') as string,
-  }
+      const { error } = await supabase.auth.signInWithPassword(parsedInput)
 
-  const { error } = await supabase.auth.signInWithPassword(data)
-
-  if (error) {
-    redirect('/error')
-  }
-
-  revalidatePath('/', 'layout')
-  redirect('/')
-}
+      if (error) throw new SupabaseError(error.message)
+    } catch (error) {
+      if (error instanceof SupabaseError) {
+        throw error
+      }
+      throw new Error('Failed to login')
+    }
+  })

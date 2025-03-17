@@ -1,7 +1,7 @@
 'use server'
 
 import { cache } from 'react'
-import { prisma } from 'lib/prisma'
+import { prisma } from '@/lib/prisma'
 import { checkAuth } from '@/utils/supabase/checkAuth'
 
 export const getUserRecipes = cache(async () => {
