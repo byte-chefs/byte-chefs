@@ -1,5 +1,8 @@
 import type { Metadata } from 'next'
 import { Cantarell, Roboto } from 'next/font/google'
+import Providers from '@/components/common/Providers'
+import Header from '@/components/common/Header'
+import Footer from '@/components/common/Footer'
 import './globals.css'
 
 const cantarellSans = Cantarell({
@@ -25,9 +28,15 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className={`${cantarellSans.variable} ${robotoSans.variable} antialiased`}>
-        {children}
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={`${cantarellSans.variable} ${robotoSans.variable} pt-15 antialiased md:pt-20`}
+      >
+        <Providers>
+          <Header />
+          {children}
+          <Footer />
+        </Providers>
       </body>
     </html>
   )
