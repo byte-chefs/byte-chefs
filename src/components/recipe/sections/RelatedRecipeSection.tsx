@@ -21,7 +21,7 @@ const RelatedRecipeSection: FC = () => {
             />
             <h3 className="mt-5">Homemade kebab</h3>
             <div className="flex items-center mt-4 text-sm md:text-lg lg:text-xl gap-x-2.5">
-              <img src="/time.svg" alt="Time Icon" className="h-3 w-3 lg:h-6 lg:w-6" />
+              <img src="/icons/time.svg" alt="Time Icon" className="h-3 w-3 lg:h-6 lg:w-6" />
               20 minutes
             </div>
           </div>
@@ -35,7 +35,7 @@ const RelatedRecipeSection: FC = () => {
             />
             <h3 className="mt-5">Homemade kebab</h3>
             <div className="flex items-center mt-4 text-sm md:text-lg lg:text-xl gap-x-2.5">
-              <img src="/time.svg" alt="Time Icon" className="h-3 w-3 lg:h-6 lg:w-6" />
+              <img src="/icons/time.svg" alt="Time Icon" className="h-3 w-3 lg:h-6 lg:w-6" />
               20 minutes
             </div>
           </div>
@@ -49,7 +49,7 @@ const RelatedRecipeSection: FC = () => {
             />
             <h3 className="mt-5">Homemade kebab</h3>
             <div className="flex items-center mt-4 text-sm md:text-lg lg:text-xl gap-x-2.5">
-              <img src="/time.svg" alt="Time Icon" className="h-3 w-3 lg:h-6 lg:w-6" />
+              <img src="/icons/time.svg" alt="Time Icon" className="h-3 w-3 lg:h-6 lg:w-6" />
               20 minutes
             </div>
           </div>

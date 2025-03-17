@@ -12,13 +12,13 @@ const TitleRecipeSection: FC<RecipeOverviewProps> = ({ recipe }) => {
           <div className="flex justify-center gap-x-5 flex-wrap lg:block">
             {recipe.cookingTime && (
               <div className="flex text-md lg:text-xl items-center lg:mt-14 lg:mb-5 mt-4 py-5 tracking-widest lg:gap-x-6 gap-x-2">
-                <img src="/time.svg" alt="Time Icon" className="w-6 h-6 lg:w-12 lg:h-12" />
+                <img src="/icons/time.svg" alt="Time Icon" className="w-6 h-6 lg:w-12 lg:h-12" />
                 {recipe.cookingTime} minutes
               </div>
             )}
             {recipe.difficulty && (
               <div className="flex text-md lg:text-xl items-center py-5 mt-4 lg:mt-0 lg:mb-5 tracking-widest gap-x-6">
-                <img src="/time.svg" alt="Time Icon" className="w-6 h-6 lg:w-12 lg:h-12" />
+                <img src="/icons/time.svg" alt="Time Icon" className="w-6 h-6 lg:w-12 lg:h-12" />
                 {recipe.difficulty}
               </div>
             )}
