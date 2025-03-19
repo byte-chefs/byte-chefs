@@ -1,94 +1,128 @@
 'use client'
 
-//TODO: decompose, extract types, add fields and styles
-
 import React from 'react'
-import { useForm } from 'react-hook-form'
+import { useFieldArray } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
 import { createRecipeAction } from '@/actions/recipe/createRecipeAction'
 
-type CreateRecipeDTO = {
-  name: string
-  cookingTime: number
-  description: string
-}
-
-const schema = z.object({
-  name: z.string().min(1, 'Recipe name is required'),
-  cookingTime: z.number().int().positive().min(1, 'Cooking time is required'),
-  description: z.string().min(1, 'Description is required'),
-})
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/Form'
+import { Input } from '@/components/ui/Input'
+import { Spinner } from '@/components/ui/Spinner'
+import ROUTES from '@/app/constants/routes'
+import { useHookFormAction } from '@next-safe-action/adapter-react-hook-form/hooks'
+import { toast } from 'react-toastify'
+import { Button } from '@/components/ui/Button'
+import { useRouter } from 'next/navigation'
+import { createRecipeSchema } from '@/schemas/recipe/createRecipeSchema'
 
 const CreateRecipeForm = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<CreateRecipeDTO>({
-    resolver: zodResolver(schema),
-  })
+  const router = useRouter()
 
-  const onSubmit = async (data: CreateRecipeDTO) => {
-    await createRecipeAction(data)
-  }
+  const { form, action, handleSubmitWithAction } = useHookFormAction(
+    createRecipeAction,
+    zodResolver(createRecipeSchema),
+    {
+      formProps: {
+        defaultValues: {
+          name: '',
+          cookingTime: 0,
+          description: [],
+        },
+      },
+      actionProps: {
+        onSuccess: () => {
+          toast.success('The recipe was created')
+          router.push(ROUTES.RECIPES)
+          router.refresh()
+        },
+        onError: ({ error }) => {
+          toast.error(error.serverError)
+        },
+      },
+    }
+  )
+
+  const { fields, append, remove } = useFieldArray({
+    control: form.control,
+    name: 'description' as never,
+  })
 
   return (
     <div className="m-auto max-w-[400px]">
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-        <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-            Recipe Name
-          </label>
-          <input
-            type="text"
-            id="name"
-            {...register('name')}
-            placeholder="Enter recipe name"
-            className="mt-1 block w-full rounded-md border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+      <Form {...form}>
+        <form onSubmit={handleSubmitWithAction} className="space-y-6">
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Recipe name</FormLabel>
+                <FormControl>
+                  <Input {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
           />
-          {errors.name && <p className="mt-1 text-xs text-red-500">{errors.name.message}</p>}
-        </div>
 
-        <div>
-          <label htmlFor="cookingTime" className="block text-sm font-medium text-gray-700">
-            Cooking Time (minutes)
-          </label>
-          <input
-            type="number"
-            id="cookingTime"
-            {...register('cookingTime')}
-            placeholder="Enter cooking time"
-            className="mt-1 block w-full rounded-md border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+          <FormField
+            control={form.control}
+            name="cookingTime"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Cooking Time (minutes)</FormLabel>
+                <FormControl>
+                  <Input
+                    type="number"
+                    {...field}
+                    onChange={(e) => field.onChange(e.target.value ? +e.target.value : 0)}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
           />
-          {errors.cookingTime && (
-            <p className="mt-1 text-xs text-red-500">{errors.cookingTime.message}</p>
-          )}
-        </div>
 
-        <div>
-          <label htmlFor="description" className="block text-sm font-medium text-gray-700">
-            Description
-          </label>
-          <textarea
-            id="description"
-            {...register('description')}
-            placeholder="Enter recipe description"
-            rows={4}
-            className="mt-1 block w-full rounded-md border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-          />
-          {errors.description && (
-            <p className="mt-1 text-xs text-red-500">{errors.description.message}</p>
-          )}
-        </div>
+          <div>
+            <FormLabel>Step by step description</FormLabel>
+            <div className="flex flex-col gap-2">
+              {fields.map((item, index) => (
+                <div key={item.id} className="flex w-full items-center space-x-2">
+                  <p>{index + 1}</p>
+                  <FormField
+                    control={form.control}
+                    name={`description.${index}`}
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormControl>
+                          <Input {...field} />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+                  <Button type="button" onClick={() => remove(index)} className="bg-red-500">
+                    -
+                  </Button>
+                </div>
+              ))}
+            </div>
+            <Button type="button" onClick={() => append('')} className="mt-2">
+              +
+            </Button>
+          </div>
 
-        <button
-          type="submit"
-          className="w-full rounded-md bg-blue-500 px-4 py-2 font-semibold text-white hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-        >
-          Create Recipe
-        </button>
-      </form>
+          <Button type="submit" className="w-full" disabled={action.isExecuting}>
+            {action.isExecuting ? <Spinner /> : 'Create'}
+          </Button>
+        </form>
+      </Form>
     </div>
   )
 }
