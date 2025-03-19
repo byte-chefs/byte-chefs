@@ -1,16 +1,19 @@
-import { Recipe } from '@/types'
-import { getRecipe } from '@/actions/recipe/getRecipe'
 import { notFound } from 'next/navigation'
+import { getRecipe } from '@/actions/recipe/getRecipe'
 import RecipeOverview from '@/components/recipe/RecipeOverview'
 
 export default async function RecipePage({ params }: { params: { recipeId: string } }) {
-  const id = params.recipeId;
+  const id = params.recipeId
 
   if (!id) {
-    return notFound();
+    return notFound()
   }
 
-  const recipe: Recipe = await getRecipe(Number(id));
+  const recipe = await getRecipe(Number(id))
+
+  if (!recipe) {
+    return notFound()
+  }
 
   return (
     <main>

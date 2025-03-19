@@ -17,4 +17,4 @@ const RecipeOverview: FC<RecipeOverviewProps> = ({ recipe }) => {
   )
 }
 
-export default RecipeOverview;
+export default RecipeOverview

@@ -1,12 +1,14 @@
 const ROUTES = {
   HOMEPAGE: '/',
-  LOGIN: '/login',
+  LOGIN: '/auth/login',
+  REGISTER: '/auth/register',
   FAVOURITES: '/favourites',
   MY_RECIPES: '/my-recipes',
   RECIPE: '/recipe',
   RANK: '/rank',
   RECIPES: '/recipes',
   TAG: '/tags',
+  PROFILE: '/profile',
 }
 
 export const PUBLIC_ROUTES = [

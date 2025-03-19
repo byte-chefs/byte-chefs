@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Cantarell, Roboto } from 'next/font/google'
+import { ToastContainer } from 'react-toastify'
 import Providers from '@/components/common/Providers'
 import Header from '@/components/common/Header'
 import Footer from '@/components/common/Footer'
@@ -12,7 +13,7 @@ const cantarellSans = Cantarell({
 })
 
 const robotoSans = Roboto({
-  weight: ['400', '700'],
+  weight: ['400', '500', '700'],
   variable: '--font-roboto-sans',
   subsets: ['latin'],
 })
@@ -28,15 +29,16 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className="h-full">
       <body
-        className={`${cantarellSans.variable} ${robotoSans.variable} pt-15 antialiased md:pt-20`}
+        className={`${cantarellSans.variable} ${robotoSans.variable} flex h-full flex-col pt-15 antialiased md:pt-20`}
       >
         <Providers>
           <Header />
           {children}
           <Footer />
         </Providers>
+        <ToastContainer position="bottom-right" />
       </body>
     </html>
   )
