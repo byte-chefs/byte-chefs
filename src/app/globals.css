@@ -15,7 +15,18 @@
   --color-popover-foreground: var(--popover-foreground);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
+  --font-primary: 'Cantarell', sans-serif;
   --font-secondary: 'Roboto', sans-serif;
+  --text-5xl: 64px;
+  --text-4xl: 48px;
+  --text-3xl: 32px;
+  --text-2xl: 24px;
+  --text-xl: 20px;
+  --text-lg: 16px;
+  --text-md: 14px;
+  --text-base: 12px;
+  --text-sm: 10px;
+  --text-xs: 8px;
   --font-semibold: 700;
   --color-primary-default: #1a5319;
   --color-primary-lighter: #508d4e;
@@ -120,5 +131,5 @@
 body {
   color: var(--foreground);
   background-color: var(--background);
-  font-family: Roboto, sans-serif;
+  font-family: Roboto, Cantarell, sans-serif;
 }

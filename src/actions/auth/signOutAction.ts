@@ -1,5 +1,8 @@
 'use server'
 
+import { redirect } from 'next/navigation'
+
+import ROUTES from '@/app/constants/routes'
 import { createClient } from '@/utils/supabase/server'
 
 export async function signOutAction() {
@@ -12,7 +15,7 @@ export async function signOutAction() {
       return { error: error.message }
     }
 
-    return { success: true }
+    redirect(ROUTES.HOMEPAGE)
   } catch (error) {
     console.error('Sign out error:', error)
     return { error: 'Failed to sign out' }

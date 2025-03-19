@@ -7,4 +7,4 @@ const Spinner = (props: React.HTMLAttributes<SVGSVGElement>) => {
   return <Loader className={cn('animate-spin', className)} {...rest} />
 }
 
-export default Spinner
+export { Spinner }
