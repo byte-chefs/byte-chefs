@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useMemo } from 'react'
+import { ChangeEvent, useCallback } from 'react'
 import { MultiValue, SingleValue } from 'react-select'
 
 import useNavigation from '@/hooks/useNavigation'
@@ -81,13 +81,11 @@ const useSearchAndFiltering = (): ReturnData => {
     [params]
   )
 
-  return useMemo(() => {
-    return {
-      handleFiltering,
-      handleSearch,
-      handlePageSet,
-    }
-  }, [handleFiltering, handleSearch, handlePageSet])
+  return {
+    handleFiltering,
+    handleSearch,
+    handlePageSet,
+  }
 }
 
 export default useSearchAndFiltering

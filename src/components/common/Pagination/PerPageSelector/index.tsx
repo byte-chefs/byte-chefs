@@ -3,7 +3,7 @@
 import { DEFAULT_PER_PAGE, PAGE_SIZES } from '@/app/constants/pagination'
 import useSearchAndFiltering from '@/hooks/useSearchAndFiltering'
 import { useSearchParams } from 'next/navigation'
-import React from 'react'
+import React, { useMemo } from 'react'
 import dynamic from 'next/dynamic'
 
 const ReactSelect = dynamic(() => import('react-select'), {
@@ -13,13 +13,14 @@ const ReactSelect = dynamic(() => import('react-select'), {
 const PerPageSelector = () => {
   const { handleFiltering } = useSearchAndFiltering()
   const searchParams = useSearchParams()
-  const params = new URLSearchParams(String(searchParams))
-  const currentPage = params.get('perPage') || DEFAULT_PER_PAGE
+  const currentPage = searchParams.get('perPage') || DEFAULT_PER_PAGE
 
-  const options = PAGE_SIZES.map((size) => ({
-    value: size,
-    label: size,
-  }))
+  const options = useMemo(() => {
+    return PAGE_SIZES.map((size) => ({
+      value: size,
+      label: size,
+    }))
+  }, [])
 
   const currentValue = options.find((opt) => opt.value === +currentPage)
 

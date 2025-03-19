@@ -16,22 +16,27 @@ export default async function getPaginatedData(
 
   const modelType: PrismaClient[typeof model] = prisma[model]
 
-  //@ts-expect-error models might have different findmany settings
-  const data = await modelType.findMany({
-    skip: +skip,
-    take: +take,
-    where: where,
-    orderBy: orderBy,
-  })
+  try {
+    //@ts-expect-error models might have different findmany settings
+    const data = await modelType.findMany({
+      skip: +skip,
+      take: +take,
+      where: where,
+      orderBy: orderBy,
+    })
 
-  //@ts-expect-error models might have different findmany settings
-  const totalCount = await modelType.count({
-    where: where,
-  })
+    //@ts-expect-error models might have different count settings
+    const totalCount = await modelType.count({
+      where: where,
+    })
 
-  return {
-    data,
-    totalCount,
-    totalPages: Math.ceil(totalCount / perPage),
+    return {
+      data,
+      totalCount,
+      totalPages: Math.ceil(totalCount / perPage),
+    }
+  } catch (e) {
+    console.log(e)
+    throw new Error(`Failed to fetch data for ${model} model`)
   }
 }

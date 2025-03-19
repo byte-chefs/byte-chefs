@@ -3,7 +3,7 @@
 import { DEFAULT_PAGE } from '@/app/constants/pagination'
 import useSearchAndFiltering from '@/hooks/useSearchAndFiltering'
 import { useSearchParams } from 'next/navigation'
-import React from 'react'
+import React, { useCallback } from 'react'
 import ReactPaginate from 'react-paginate'
 
 type PaginationProps = {
@@ -17,13 +17,12 @@ type PaginationEvent = {
 const Pagination = ({ totalPages }: PaginationProps) => {
   const searchParams = useSearchParams()
   const { handlePageSet } = useSearchAndFiltering()
-  const params = new URLSearchParams(String(searchParams))
-  const currentPage = params.get('page') || DEFAULT_PAGE
+  const currentPage = searchParams.get('page') || DEFAULT_PAGE
 
-  const handlePageClick = (event: PaginationEvent) => {
+  const handlePageClick = useCallback((event: PaginationEvent) => {
     const selectedPage = event.selected + 1
     handlePageSet(selectedPage.toString())
-  }
+  }, [])
 
   if (totalPages < 2) {
     return null
