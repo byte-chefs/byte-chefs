@@ -3,14 +3,14 @@ import { RecipeListProps } from '@/types'
 import RecipeCard from './RecipeCard'
 
 const RecipeList: FC<RecipeListProps> = ({ recipes }) => {
-  return (
-    <div className="space-y-6">
-      {recipes.length > 0 ? (
-        recipes.map((recipe) => <RecipeCard key={recipe.id} recipe={recipe} />)
-      ) : (
-        <span className="text-center text-3xl font-semibold text-gray-100">No data</span>
-      )}
+  return recipes.length > 0 ? (
+    <div className="grid grid-cols-2 gap-5.5 md:grid-cols-3 md:gap-11">
+      {recipes.map((recipe) => (
+        <RecipeCard key={recipe.id} recipe={recipe} />
+      ))}
     </div>
+  ) : (
+    <h3 className="bold text-center">No data</h3>
   )
 }
 

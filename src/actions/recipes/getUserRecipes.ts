@@ -1,22 +1,22 @@
 'use server'
 
 import { cache } from 'react'
-import { prisma } from 'lib/prisma'
-import { checkAuth } from '@/utils/supabase/checkAuth'
+import { getUserInfo } from '../auth/getUserInfo'
+import getPaginatedData from '../heplers/getPaginatedData'
+import { TSearchParams } from '@/types/pageProps'
 
-export const getUserRecipes = cache(async () => {
-  const user = await checkAuth()
-  // TODO: need real user id
-  const FAKE_ID = 1
+export const getUserRecipes = cache(async (searchParams: TSearchParams) => {
+  const user = await getUserInfo()
 
-  if (!user) {
-    throw new Error('User is not authenticated')
-  }
+  if (!user) throw new Error('User is not authenticated')
 
   try {
-    return await prisma.recipe.findMany({
-      where: { userId: FAKE_ID },
+    const { page, perPage } = await searchParams
+    const { data, totalPages } = await getPaginatedData('recipe', page, perPage, {
+      userId: user.id,
     })
+
+    return { data, totalPages }
   } catch (error) {
     console.error('Error fetching user recipes:', error)
     throw new Error('Failed to fetch user recipes')
