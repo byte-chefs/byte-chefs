@@ -10,14 +10,12 @@ export default async function RecipesListingPage(props: TProps) {
   const { data, totalPages } = await getAllRecipes(props.searchParams || {})
 
   return (
-    <main>
-      <div className="min-h-screen w-full px-4 py-12 sm:px-6 lg:px-8 dark:bg-gray-900">
-        <div className="mx-auto max-w-4xl">
-          <h1 className="mb-8 text-center text-3xl font-semibold">All recipes listing</h1>
-          <PerPageSelector />
-          <RecipeList recipes={data} />
-          <Pagination totalPages={totalPages} />
-        </div>
+    <main className="min-h-screen w-full">
+      <div className="mx-auto max-w-[1292px] px-4 md:px-6">
+        <h2 className="mb-8 text-center font-bold md:mb-12">All recipes listing</h2>
+        <PerPageSelector />
+        <RecipeList recipes={data} />
+        <Pagination totalPages={totalPages} />
       </div>
     </main>
   )
