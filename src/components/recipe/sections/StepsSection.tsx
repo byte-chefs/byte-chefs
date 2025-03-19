@@ -1,15 +1,8 @@
 import { FC } from 'react'
 import clsx from 'clsx';
 
-const stepsArray = [
-  "With a sharp knife, lightly score the fat on the pork chops at 1cm intervals – this will stop them curling up in the pan. Season all over with sea salt.",
-  "Place a large frying pan on a medium-high heat and drizzle in ½ tablespoon of oil. Once hot, lay in the pork chops and fry for around 2 minutes on each side, depending on the thickness of your chops, or until golden, crisp and nearly cooked through.",
-  "Meanwhile, tip the grains into a large bowl, top with the watercress and cover with non-PVC clingfilm. Microwave on full power for 3 minutes, or until the watercress has darkened and wilted and the grains are piping hot.",
-  "When the pork chops have 1 minute to go, add the mustard, honey, and 50ml of water. Move and flip the chops around in the pan, until glossy, deep golden brown and glazed all over, then remove to a board and slice them up.",
-  "Divide the grains between plates, top with a sliced pork chop and finish with a dollop of crème fraîche.",
-];
 
-const StepsSection: FC = () => {
+const StepsSection: FC<{steps: string[]}> = ({steps}) => {
 
   return (
     <section className="bg-white px-6 lg:pt-24 py-20 lg:pb-40">
@@ -22,7 +15,7 @@ const StepsSection: FC = () => {
       </div>
 
       <div className="mt-8 mx-auto space-y-4">
-        {stepsArray.map((step, index) => (
+        {steps.map((step, index) => (
           <div
             key={index}
             className={clsx(

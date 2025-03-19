@@ -10,6 +10,7 @@ export type Recipe = {
   favouritesTotal: number
   difficulty: string | null
   status: string
+  steps: string[]
   userId: number
 }
 
