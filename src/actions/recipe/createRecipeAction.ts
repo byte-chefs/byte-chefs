@@ -6,7 +6,7 @@ import { getUserInfo } from '@/actions/auth/getUserInfo'
 type CreateRecipeDTO = {
   name: string
   cookingTime: number
-  description: string
+  description: Array<string>
 }
 
 export async function createRecipeAction(formData: CreateRecipeDTO) {
@@ -21,7 +21,7 @@ export async function createRecipeAction(formData: CreateRecipeDTO) {
       data: {
         name,
         cookingTime,
-        description,
+        description: description as never,
         status: 'Published',
         userId: user.id,
       },
