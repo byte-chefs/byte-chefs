@@ -14,7 +14,7 @@ import {
   FormMessage,
 } from '@/components/ui/Form'
 import { Input } from '@/components/ui/Input'
-import Spinner from '@/components/ui/Spinner'
+import { Spinner } from '@/components/ui/Spinner'
 import ROUTES from '@/app/constants/routes'
 import { useHookFormAction } from '@next-safe-action/adapter-react-hook-form/hooks'
 import { toast } from 'react-toastify'
