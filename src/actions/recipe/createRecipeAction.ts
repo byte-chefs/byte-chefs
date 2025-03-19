@@ -1,6 +1,6 @@
 'use server'
 
-import { prisma } from 'lib/prisma'
+import { prisma } from '@/lib/prisma'
 import { getUserInfo } from '@/actions/auth/getUserInfo'
 
 type CreateRecipeDTO = {

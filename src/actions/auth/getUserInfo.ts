@@ -1,6 +1,6 @@
 'use server'
 
-import { prisma } from 'lib/prisma'
+import { prisma } from '@/lib/prisma'
 import { checkAuth } from '@/utils/supabase/checkAuth'
 
 export async function getUserInfo() {
