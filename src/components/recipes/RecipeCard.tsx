@@ -1,19 +1,25 @@
 import { FC } from 'react'
 import { RecipeCardProps } from '@/types'
+import Image from 'next/image'
 import Link from 'next/link'
+import { Clock } from 'lucide-react'
 
 const RecipeCard: FC<RecipeCardProps> = ({ recipe }) => {
   return (
-    <Link
-      href={`/recipes/${recipe.id}`}
-      className="relative overflow-hidden rounded-lg bg-gray-800 shadow-lg transition duration-300 hover:bg-gray-700"
-    >
-      <div className="p-6">
-        <h2 className="text-xl font-semibold text-gray-100">{recipe?.name}</h2>
-        <p className="mt-2 text-sm text-gray-400">{recipe?.description}</p>
-        <div className="mt-4 flex items-center justify-between text-sm text-gray-300">
-          <span>{recipe?.cookingTime} min</span>
-          <span>{recipe?.calories || 'N/A'} kcal</span>
+    <Link href={`/recipes/${recipe.id}`} className="w-full">
+      <div className="relative aspect-[10/13] w-full overflow-hidden rounded-xl shadow-2xl md:rounded-3xl">
+        <Image
+          src={recipe?.photo || '/recipe-placeholder.png'}
+          alt={recipe?.name}
+          layout="fill"
+          objectFit="cover"
+        />
+      </div>
+      <div className="mt-2 flex flex-col md:mt-6">
+        <h3 className="leading-none md:font-bold">{recipe?.name}</h3>
+        <div className="mt-2 flex items-center gap-1 md:mt-4 md:gap-3">
+          <Clock className="h-3 w-3 md:h-6 md:w-6" />
+          <p className="leading-none">{recipe?.cookingTime} min</p>
         </div>
       </div>
     </Link>
