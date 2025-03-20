@@ -6,7 +6,7 @@ import { TProps } from '@/types/pageProps'
 export const revalidate = 60
 
 export default async function MyRecepiesPage(props: TProps) {
-  const { data, totalPages } = await getUserRecipes(props.searchParams || {})
+  const { data, totalPages } = await getUserRecipes(props.searchParams || Promise.resolve({}))
 
   return (
     <main className="min-h-screen w-full">
