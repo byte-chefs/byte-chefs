@@ -3,9 +3,9 @@
 import { createClient } from '@/utils/supabase/server'
 
 export async function signOutAction() {
-  try {
-    const supabase = await createClient()
+  const supabase = await createClient()
 
+  try {
     const { error } = await supabase.auth.signOut()
 
     if (error) {

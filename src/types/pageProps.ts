@@ -16,7 +16,7 @@ export type TSearchParams = {
 }
 
 export type TProps = {
-  searchParams?: TSearchParams
+  searchParams?: Promise<TSearchParams>
 }
 
 export type TSelectOption = { label: string | number; value: string | number }
