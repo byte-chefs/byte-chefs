@@ -1,10 +1,12 @@
-import { getUserInfoWithoutRedirect } from '@/actions/auth/getUserInfoWithoutRedirect'
+import { FC } from 'react'
+
 import HeaderLogo from '@/components/common/Header/components/HeaderLogo'
 import HeaderNavDesktop from '@/components/common/Header/components/HeaderNavDesktop'
 import HeaderNavMobile from '@/components/common/Header/components/HeaderNavMobile'
 import UserMenu from '@/components/common/Header/components/UserMenu'
+import { getUserInfoWithoutRedirect } from '@/actions/auth/getUserInfoWithoutRedirect'
 
-export default async function Header() {
+const Header: FC = async () => {
   const user = await getUserInfoWithoutRedirect()
 
   return (
@@ -20,3 +22,5 @@ export default async function Header() {
     </header>
   )
 }
+
+export default Header
