@@ -6,7 +6,7 @@ import { Clock } from 'lucide-react'
 
 const RecipeCard: FC<RecipeCardProps> = ({ recipe }) => {
   return (
-    <Link href={`/recipe/${recipe?.id}`} className="w-full">
+    <Link href={`/recipes/${recipe.id}`} className="w-full">
       <div className="relative aspect-[10/13] w-full overflow-hidden rounded-xl shadow-2xl md:rounded-3xl">
         <Image
           src={recipe?.photo || '/recipe-placeholder.png'}

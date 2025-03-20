@@ -22,3 +22,7 @@ export type RecipeCardProps = {
 export type RecipeListProps = {
   recipes: Recipes
 }
+
+export type RecipeOverviewProps = {
+  recipe: Recipe
+}

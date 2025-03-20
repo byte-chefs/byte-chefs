@@ -11,9 +11,9 @@ export const loginAction = actionClient
     handleValidationErrorsShape: async (ve) => flattenValidationErrors(ve).fieldErrors,
   })
   .action(async ({ parsedInput }) => {
-    try {
-      const supabase = await createClient()
+    const supabase = await createClient()
 
+    try {
       const { error } = await supabase.auth.signInWithPassword(parsedInput)
 
       if (error) throw new SupabaseError(error.message)
