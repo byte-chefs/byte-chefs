@@ -18,7 +18,7 @@ const ThemeSwitcherButton: FC<Props> = (props) => {
       type="button"
       role="radio"
       aria-checked={selected}
-      className="dark:aria-checked:bg-black-lighter aria-checked:bg-black-lightest h-9 w-9 cursor-pointer rounded-md px-2 transition-colors hover:ring-1 focus-visible:ring-1 focus-visible:outline-none [&_svg]:size-5 [&_svg]:shrink-0"
+      className="dark:aria-checked:bg-black-lighter aria-checked:bg-white-darkest h-9 w-9 cursor-pointer rounded-md px-2 transition-colors hover:ring-1 focus-visible:ring-1 focus-visible:outline-none [&_svg]:size-5 [&_svg]:shrink-0"
       onClick={() => setTheme(theme)}
     >
       {icon}

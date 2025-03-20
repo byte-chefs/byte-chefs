@@ -1,6 +1,6 @@
 import { DEFAULT_PAGE, DEFAULT_PER_PAGE } from '@/app/constants/pagination'
 import { PrismaClient } from '@prisma/client'
-import { prisma } from 'lib/prisma'
+import { prisma } from '@/lib/prisma'
 
 type ModelNames = Exclude<Extract<keyof PrismaClient, string>, `$${string}`>
 

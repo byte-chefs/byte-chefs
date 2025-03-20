@@ -2,9 +2,9 @@ import ThemeSwitcher from '@/components/common/ThemeSwitcher'
 
 const Footer = () => {
   return (
-    <div className="py-3">
+    <footer className="border-t py-3">
       <ThemeSwitcher />
-    </div>
+    </footer>
   )
 }
 

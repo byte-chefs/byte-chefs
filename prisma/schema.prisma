@@ -27,7 +27,7 @@ model Recipe {
   name            String
   photo           String?
   cookingTime     Int
-  description     String
+  description     String[]
   calories        Int?
   favouritesTotal Int             @default(0)
   difficulty      String?

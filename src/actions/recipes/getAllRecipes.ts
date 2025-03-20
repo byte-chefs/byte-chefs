@@ -1,7 +1,7 @@
 'use server'
 
-import { TSearchParams } from '@/types/pageProps'
 import { cache } from 'react'
+import { TSearchParams } from '@/types/pageProps'
 import getPaginatedData from '../heplers/getPaginatedData'
 
 export const getAllRecipes = cache(async (searchParams: TSearchParams) => {

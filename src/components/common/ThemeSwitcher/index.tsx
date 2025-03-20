@@ -12,7 +12,7 @@ const ThemeSwitcher: FC = () => {
 
   useEffect(() => setMounted(true), [])
 
-  if (!mounted) return null
+  if (!mounted) return <div className="h-9" />
 
   return (
     <div role="group" className="flex items-center justify-center gap-1">

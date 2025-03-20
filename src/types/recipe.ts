@@ -1,7 +1,7 @@
 export type Recipe = {
   id: number
   name: string
-  description: string
+  description: Array<string>
   createdAt: Date
   updatedAt: Date
   photo: string | null
