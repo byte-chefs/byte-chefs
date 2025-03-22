@@ -9,8 +9,8 @@ export default async function MyRecepiesPage(props: TProps) {
   const { data, totalPages } = await getUserRecipes(props.searchParams || Promise.resolve({}))
 
   return (
-    <main className="min-h-screen w-full">
-      <div className="mx-auto max-w-[1292px] px-4 md:px-6">
+    <main className="w-full flex-1">
+      <div className="mx-auto max-w-[1292px] px-4 py-6 md:px-6">
         <h2 className="mb-8 text-center font-bold md:mb-12">My recipes listing</h2>
         <RecipeList recipes={data} />
         <Pagination totalPages={totalPages} />

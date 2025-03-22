@@ -23,6 +23,11 @@ export type RecipeListProps = {
   recipes: Recipes
 }
 
+export type ToggleFavouriteProps = {
+  recipeId: number
+  initialIsFavorite: boolean
+}
+
 export type RecipeOverviewProps = {
   recipe: Recipe
 }

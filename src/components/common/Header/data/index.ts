@@ -8,4 +8,5 @@ export const publicHeaderNavItems = [
 export const privateHeaderNavItems = [
   { title: 'Profile', path: ROUTES.PROFILE },
   { title: 'My Recipes', path: ROUTES.MY_RECIPES },
+  { title: 'Favourites Recipes', path: ROUTES.FAVOURITES },
 ]

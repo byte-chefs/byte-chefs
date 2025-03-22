@@ -1,8 +1,11 @@
 import { FC } from 'react'
 import Image from 'next/image'
 import { RecipeOverviewProps } from '@/types'
+import FavoriteToggle from '@/components/recipe/chunks/FavoriteToggle'
+import { checkIsFavourite } from '@/actions/recipes/checkIsFavourite'
 
-const TitleRecipeSection: FC<RecipeOverviewProps> = ({ recipe }) => {
+const TitleRecipeSection: FC<RecipeOverviewProps> = async ({ recipe }) => {
+  const { favorited } = await checkIsFavourite(recipe.id)
   return (
     <section className="text-black-default w-full bg-white px-4 pt-20 pb-24 sm:px-6 lg:px-8 lg:pt-32 lg:pb-40">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between lg:flex-row">
@@ -22,9 +25,7 @@ const TitleRecipeSection: FC<RecipeOverviewProps> = ({ recipe }) => {
               </div>
             )}
           </div>
-          <button className="border-primary-lighter text-primary-lighter mt-14 hidden cursor-pointer border-b-2 p-2.5 lg:block">
-            Add to favorites
-          </button>
+          <FavoriteToggle recipeId={recipe.id} initialIsFavorite={favorited} />
         </div>
         <div className="w-content relative lg:w-3/7">
           <Image
