@@ -3,7 +3,7 @@
 import { flattenValidationErrors } from 'next-safe-action'
 import { actionClient } from '@/lib/safe-action'
 import { prisma } from '@/lib/prisma'
-import { getUserInfo } from '@/actions/auth/getUserInfo'
+import { getAuthUserInfo } from '@/actions/auth/getAuthUserInfo'
 import { SupabaseError } from '@/lib/errors/supabase-error'
 import { createRecipeSchema } from '@/schemas/recipe/createRecipeSchema'
 
@@ -13,7 +13,7 @@ export const createRecipeAction = actionClient
   })
   .action(async ({ parsedInput }) => {
     const { name, cookingTime, description } = parsedInput
-    const user = await getUserInfo()
+    const user = await getAuthUserInfo()
 
     if (!user) {
       throw new Error('User is not authenticated')

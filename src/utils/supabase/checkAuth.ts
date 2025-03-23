@@ -1,15 +1,14 @@
 import { redirect } from 'next/navigation'
 
-import { createClient } from '@/utils/supabase/server'
+import { getUser } from '@/utils/supabase/getUser'
 import ROUTES from '@/app/constants/routes'
 
 export async function checkAuth() {
-  const supabase = await createClient()
-  const { data, error } = await supabase.auth.getUser()
+  const user = await getUser()
 
-  if (error || !data?.user) {
+  if (!user) {
     redirect(ROUTES.LOGIN)
   }
 
-  return data.user
+  return user
 }
