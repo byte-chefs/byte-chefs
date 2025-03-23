@@ -1,12 +1,12 @@
 'use server'
 
 import { cache } from 'react'
-import { getUserInfo } from '../auth/getUserInfo'
-import getPaginatedData from '../heplers/getPaginatedData'
+import { getAuthUserInfo } from '@/actions/auth/getAuthUserInfo'
+import getPaginatedData from '@/actions/heplers/getPaginatedData'
 import { TSearchParams } from '@/types/pageProps'
 
 export const getUserRecipes = cache(async (searchParams: Promise<TSearchParams>) => {
-  const user = await getUserInfo()
+  const user = await getAuthUserInfo()
 
   if (!user) throw new Error('User is not authenticated')
 

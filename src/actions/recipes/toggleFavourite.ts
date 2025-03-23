@@ -2,10 +2,10 @@
 
 import { prisma } from '@/lib/prisma'
 import { revalidatePath } from 'next/cache'
-import { getUserInfo } from '@/actions/auth/getUserInfo'
+import { getAuthUserInfo } from '@/actions/auth/getAuthUserInfo'
 
 export const toggleFavourite = async (recipeId: number) => {
-  const user = await getUserInfo()
+  const user = await getAuthUserInfo()
 
   if (!user) {
     throw new Error('User is not authenticated')
