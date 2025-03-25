@@ -21,10 +21,7 @@ export default async function RecipePage({ params }: { params: Promise<{ recipeI
 
   const ingredients: Ingredient[] = await getIngredients(Number(recipeId));
   const tags = await getRecipeTags(Number(recipeId));
-
   const user = await getUser(Number(recipe.userId));
-
-  console.log('USER IS::', user);
 
   return (
     <main>

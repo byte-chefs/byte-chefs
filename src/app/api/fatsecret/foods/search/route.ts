@@ -23,35 +23,27 @@ export async function GET(request: Request) {
   }
 
   try {
-    // Create the data object with all parameters
     const data = {
       method: 'foods.search',
       search_expression: query,
       format: 'json'
     }
 
-    // Create the request data for OAuth signing
     const request_data = {
       url: FATSECRET_API_URL,
       method: 'GET',
       data: data
     }
 
-    // Generate OAuth parameters
     const oauthParams = oauth.authorize(request_data)
-
-    // Construct the URL with all parameters (only once)
     const url = new URL(FATSECRET_API_URL)
 
-    // Combine all parameters (data + oauth)
     const allParams = { ...data, ...oauthParams }
 
-    // Add all parameters to the URL
     Object.entries(allParams).forEach(([key, value]) => {
       url.searchParams.append(key, value as string)
     })
 
-    // Make the request
     const response = await fetch(url.toString(), {
       method: 'GET',
       headers: {
