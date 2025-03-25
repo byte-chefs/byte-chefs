@@ -1,10 +1,10 @@
 generator client {
-  provider        = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -44,13 +44,13 @@ model Recipe {
 }
 
 model Ingredient {
-  id        Int @id @default(autoincrement())
+  id        Int     @id @default(autoincrement())
   foodId    Int
   servingId Int
   quantity  Int
-
-  recipeId Int
-  recipe   Recipe @relation(fields: [recipeId], references: [id])
+  name      String?
+  recipeId  Int
+  recipe    Recipe  @relation(fields: [recipeId], references: [id])
 }
 
 model Tag {

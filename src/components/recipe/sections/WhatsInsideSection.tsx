@@ -1,18 +1,14 @@
 import { FC } from 'react'
 import clsx from 'clsx'
 import Image from 'next/image'
+import { Ingredient, Tag } from '@/types'
 
-const tagsArray = ['Italian', 'Vegetarian', 'Spicy', 'Liquid', 'Dinner']
-const ingredients = [
-  '2 × 250g higher-welfare pork chops',
-  'Olive oil',
-  '180g fresh watercress',
-  '1 tablespoon wholegrain mustard',
-  '1 tablespoon runny honey',
-  '3 × 250g higher-welfare pork chops',
-]
+type WhatsInsideSectionProps = {
+  ingredients: Ingredient[]
+  tags: Tag[]
+}
 
-const WhatsInsideSection: FC = () => {
+const WhatsInsideSection: FC<WhatsInsideSectionProps> = ({ ingredients, tags }) => {
   return (
     <section className="bg-black-lightest relative px-6 pt-8 pb-14 md:px-16 lg:px-24 lg:pt-24 lg:pb-40">
       <div className="mx-auto max-w-6xl text-center">
@@ -33,9 +29,9 @@ const WhatsInsideSection: FC = () => {
                     'border-black-lightest m-0 py-5',
                     index !== ingredients.length - 1 && 'border-b'
                   )}
-                  key={ingredient}
+                  key={ingredient.id}
                 >
-                  {ingredient}
+                  {ingredient.name}
                 </li>
               ))}
             </ul>
@@ -64,12 +60,12 @@ const WhatsInsideSection: FC = () => {
             <div className="mt-7 lg:mt-14">
               <h3 className="text-left">Tags</h3>
               <div className="mt-2 flex flex-wrap gap-3">
-                {tagsArray.map((tag) => (
+                {tags?.map((tag) => (
                   <span
-                    key={tag}
+                    key={tag.id}
                     className="text-md border-black-lighter rounded-full border px-5 py-1.5 lg:px-10 lg:py-2.5 lg:text-xl"
                   >
-                    {tag}
+                    {tag.name}
                   </span>
                 ))}
               </div>

@@ -8,9 +8,19 @@ export type Recipe = {
   cookingTime: number
   calories: number | null
   favouritesTotal: number
+  personServing: number
   difficulty: string | null
   status: string
   userId: number
+}
+
+export type Ingredient = {
+  id?: number;
+  recipeId?: number;
+  name?: string | null;
+  foodId?: number;
+  quantity?: number;
+  servingId?: number;
 }
 
 export type Recipes = Array<Recipe>
@@ -25,4 +35,26 @@ export type RecipeListProps = {
 
 export type RecipeOverviewProps = {
   recipe: Recipe
+  ingredients: Ingredient[]
+  tags: Tag[]
+  user?: string
+}
+
+export enum RecipeDifficultyEnum {
+  easy = 'easy',
+  medium = 'medium',
+  hard = 'hard'
+}
+
+export enum RecipeStatusEnum {
+  draft = 'draft',
+  published = 'published',
+
+}
+
+export type Tag = {
+  id: number | string,
+  name: string,
+  exclude?: number[] | string[],
+  include?: number[] | string[],
 }

@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-export const createRecipeSchema = z.object({
+export const editRecipeSchema = z.object({
   id: z.number().int().positive('Recipe ID is required').optional(),
   name: z.string().min(1, 'Recipe name is required'),
   cookingTime: z.number().int().positive().min(1, 'Cooking time is required'),
@@ -14,9 +14,10 @@ export const createRecipeSchema = z.object({
   ingredients: z
     .array(
       z.object({
+        id: z.number().optional(),
         foodId: z.number(),
-        quantity: z.number(),
         servingId: z.number(),
+        quantity: z.number(),
         name: z.string()
       })
     )
@@ -32,4 +33,5 @@ export const createRecipeSchema = z.object({
   status: z.enum(['draft', 'published'], {
     required_error: 'Please select a status',
   }),
-});
+  personServing: z.number().int().positive().default(2).optional(),
+})
