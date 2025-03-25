@@ -1,17 +1,16 @@
 'use server'
 
 import { getUserByEmail } from '@/utils/auth/getUserByEmail'
-import { getUser } from '@/utils/supabase/getUser'
+import { checkAuth } from '@/utils/supabase/checkAuth'
 
-export async function getUserInfo() {
+export async function getAuthUserInfo() {
+  const user = await checkAuth()
+
   try {
-    const user = await getUser()
-
-    if (!user) return null
-
     return await getUserByEmail(user.email)
   } catch (error) {
     console.error('Error fetching user info:', error)
-    return null
   }
+
+  return null
 }

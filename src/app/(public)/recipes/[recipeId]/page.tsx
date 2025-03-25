@@ -7,7 +7,7 @@ import { getRecipeTags } from '@/actions/tags/getRecipeTags'
 import { getUser } from '@/actions/user/getUser'
 
 export default async function RecipePage({ params }: { params: Promise<{ recipeId: string }> }) {
-  const { recipeId } = await params;
+  const { recipeId } = await params
 
   if (!recipeId) {
     return notFound()

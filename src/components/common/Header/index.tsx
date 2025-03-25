@@ -4,10 +4,10 @@ import HeaderLogo from '@/components/common/Header/components/HeaderLogo'
 import HeaderNavDesktop from '@/components/common/Header/components/HeaderNavDesktop'
 import HeaderNavMobile from '@/components/common/Header/components/HeaderNavMobile'
 import UserMenu from '@/components/common/Header/components/UserMenu'
-import { getUserInfoWithoutRedirect } from '@/actions/auth/getUserInfoWithoutRedirect'
+import { getUserInfo } from '@/actions/auth/getUserInfo'
 
 const Header: FC = async () => {
-  const user = await getUserInfoWithoutRedirect()
+  const user = await getUserInfo()
 
   return (
     <header className="bg-background fixed inset-0 z-99 flex h-15 w-full items-center justify-center border-b drop-shadow-md md:h-20">

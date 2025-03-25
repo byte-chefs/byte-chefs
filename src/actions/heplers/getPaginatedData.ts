@@ -9,6 +9,7 @@ export default async function getPaginatedData(
   page: number = DEFAULT_PAGE,
   perPage: number = DEFAULT_PER_PAGE,
   where?: Record<string, unknown>,
+  select?: Record<string, unknown>,
   orderBy?: Record<string, unknown>
 ) {
   const skip = (page - 1) * perPage
@@ -22,6 +23,7 @@ export default async function getPaginatedData(
       skip: +skip,
       take: +take,
       where: where,
+      select: select,
       orderBy: orderBy,
     })
 

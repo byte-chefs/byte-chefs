@@ -4,8 +4,9 @@ import { cache } from 'react'
 import { getAuthUserInfo } from '@/actions/auth/getAuthUserInfo'
 import getPaginatedData from '@/actions/heplers/getPaginatedData'
 import { TSearchParams } from '@/types/pageProps'
+import { Recipe, Recipes } from '@/types/recipe'
 
-export const getUserRecipes = cache(async (searchParams: Promise<TSearchParams>) => {
+export const getFavouritesRecipes = cache(async (searchParams: Promise<TSearchParams>) => {
   const user = await getAuthUserInfo()
 
   if (!user) throw new Error('User is not authenticated')
@@ -13,11 +14,19 @@ export const getUserRecipes = cache(async (searchParams: Promise<TSearchParams>)
   const { page, perPage } = await searchParams
 
   try {
-    const { data, totalPages } = await getPaginatedData('recipe', page, perPage, {
-      userId: user.id,
-    })
+    const { data: rawData, totalPages } = await getPaginatedData(
+      'userFavorites',
+      page,
+      perPage,
+      {
+        userId: user.id,
+      },
+      { recipe: true }
+    )
 
-    return { data, totalPages }
+    const mappedData: Recipes = rawData.map(({ recipe }: { recipe: Recipe }) => recipe)
+
+    return { data: mappedData, totalPages }
   } catch (error) {
     console.error('Error fetching user recipes:', error)
     throw new Error('Failed to fetch user recipes')
