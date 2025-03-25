@@ -86,7 +86,7 @@ const CreateRecipeForm: FC<CreateRecipeFormProps> = ({ recipe, ingredients, tags
   }
 
   return (
-    <div className="m-auto max-w-[400px] py-4">
+    <div className="m-auto max-w-[500px] py-4 px-4">
       <Form {...form}>
         <form onSubmit={handleSubmit} className="space-y-8">
           <FormField

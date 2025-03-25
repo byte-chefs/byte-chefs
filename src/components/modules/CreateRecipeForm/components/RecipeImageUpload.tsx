@@ -55,7 +55,7 @@ export default function RecipeImageUpload({ value, onChange }: RecipeImageUpload
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 relative">
       {value ? (
         <div className="relative">
           <img
