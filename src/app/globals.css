@@ -133,3 +133,8 @@ body {
   background-color: var(--background);
   font-family: Roboto, Cantarell, sans-serif;
 }
+
+a,
+button {
+  cursor: pointer;
+}

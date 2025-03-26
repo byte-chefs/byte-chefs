@@ -16,7 +16,11 @@ const HeaderNavLink: FC<Props> = (props) => {
   const isCurrentPage = href === pathname
 
   return (
-    <Link href={href} className={cn(`${isCurrentPage ? 'font-bold' : ''}`, className)} {...rest}>
+    <Link
+      href={href}
+      className={cn(`${isCurrentPage ? 'font-bold' : ''} hover:underline`, className)}
+      {...rest}
+    >
       {children}
     </Link>
   )
