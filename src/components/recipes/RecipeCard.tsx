@@ -1,13 +1,21 @@
+'use client'
+
 import { FC } from 'react'
 import { RecipeCardProps } from '@/types'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ThumbsUp, Clock } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
-const RecipeCard: FC<RecipeCardProps> = ({ recipe }) => {
+const RecipeCard: FC<RecipeCardProps> = ({ recipe, direction = 'vertical' }) => {
   return (
-    <Link href={`/recipes/${recipe.id}`} className="w-full">
-      <div className="relative aspect-[10/13] w-full overflow-hidden rounded-xl shadow-2xl transition hover:scale-103 md:rounded-3xl">
+    <Link href={`/recipes/${recipe.id}`} className="w-full" onDragEnd={(e) => e.preventDefault()}>
+      <div
+        className={cn(
+          'relative w-full overflow-hidden rounded-xl shadow-2xl transition hover:scale-103 md:rounded-3xl',
+          direction === 'horizontal' ? 'aspect-[13/10]' : 'aspect-[10/13]'
+        )}
+      >
         <Image
           src={recipe?.photo || '/recipe-placeholder.png'}
           alt={recipe?.name}
