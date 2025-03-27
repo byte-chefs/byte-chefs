@@ -10,6 +10,7 @@ const ROUTES = {
   RECIPES: '/recipes',
   TAG: '/tags',
   PROFILE: '/profile',
+  PROFILE_EDIT: '/profile/edit',
 }
 
 export const PUBLIC_ROUTES = [

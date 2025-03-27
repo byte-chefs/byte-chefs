@@ -264,7 +264,7 @@ export default function IngredientSelector({ value, onChange }: IngredientSelect
       </div>
 
       {ingredients.length === 0 ? (
-        <div className="rounded-md border border-dashed p-4 text-center">
+        <div className="text-muted-foreground rounded-md border border-dashed p-4 text-center">
           No ingredients added yet. Click &#34;Add Ingredient&#34; to start.
         </div>
       ) : (

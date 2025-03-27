@@ -61,7 +61,7 @@ export default function TagSelector({ value, onChange }: TagSelectorProps) {
     <div className="space-y-4">
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
-          <Button className="w-full justify-start">
+          <Button variant="outline" className="w-full justify-start">
             {selectedTags.length > 0
               ? `${selectedTagObjects.length} tags selected`
               : 'Select tags...'}

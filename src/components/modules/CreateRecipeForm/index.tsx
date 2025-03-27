@@ -229,10 +229,8 @@ const CreateRecipeForm: FC<CreateRecipeFormProps> = ({ recipe, ingredients, tags
               </div>
             ))}
             {fields.length === 0 && (
-              <div className="rounded-md border border-dashed py-4 text-center">
-                <p className="text-muted-foreground">
-                  No steps added yet. Click &#34;Add Step&#34; to begin.
-                </p>
+              <div className="text-muted-foreground rounded-md border border-dashed py-4 text-center">
+                No steps added yet. Click &#34;Add Step&#34; to begin.
               </div>
             )}
           </div>
