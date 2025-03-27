@@ -10,6 +10,11 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: 'bg-primary text-white-default hover:bg-primary/90 cursor-pointer',
+        destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
+        outline:
+          'border border-black-primary cursor-pointer transition duration-300 hover:shadow-md',
+        secondary: 'bg-black-lightest text-black-default cursor-pointer hover:bg-black-lighter',
+        transparent: 'bg-transparent cursor-pointer',
       },
       size: {
         default: 'h-10 px-4 py-2',

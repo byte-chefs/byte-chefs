@@ -5,6 +5,7 @@ const ROUTES = {
   FAVOURITES: '/favourites',
   MY_RECIPES: '/my-recipes',
   RECIPE: '/recipe',
+  RECIPE_CREATE: '/recipe/create',
   RANK: '/rank',
   RECIPES: '/recipes',
   TAG: '/tags',
