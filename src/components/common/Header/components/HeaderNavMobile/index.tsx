@@ -7,6 +7,7 @@ import type { User } from '@prisma/client'
 
 import HeaderNavLink from '@/components/common/Header/components/HeaderNavLink'
 import { useHeaderNavMobile } from './hooks/use-header-nav-mobile'
+import { cn } from '@/lib/utils'
 import { privateHeaderNavItems, publicHeaderNavItems } from '@/components/common/Header/data'
 import ROUTES from '@/app/constants/routes'
 
@@ -21,7 +22,7 @@ const HeaderNavMobile: FC<Props> = (props) => {
 
   return (
     <>
-      <button className="z-1 md:hidden" onClick={toggleMobileNav}>
+      <button className={cn('z-1', !isMenuOpen && 'md:hidden')} onClick={toggleMobileNav}>
         {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
       </button>
       {isMenuOpen && (
@@ -38,7 +39,7 @@ const HeaderNavMobile: FC<Props> = (props) => {
                   {item.title}
                 </HeaderNavLink>
               ))}
-              <button onClick={signOutHandler} className="mt-4 text-start">
+              <button onClick={signOutHandler} className="text-destructive mt-4 text-start">
                 Sign out
               </button>
             </>

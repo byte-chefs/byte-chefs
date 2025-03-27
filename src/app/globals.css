@@ -134,6 +134,11 @@ body {
   font-family: Roboto, Cantarell, sans-serif;
 }
 
+a,
+button {
+  cursor: pointer;
+}
+
 .slick-track {
   display: flex !important;
   gap: 16px;

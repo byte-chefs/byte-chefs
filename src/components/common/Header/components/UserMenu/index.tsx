@@ -36,7 +36,7 @@ const UserMenu: FC<Props> = (props) => {
             {privateHeaderNavItems.map((item, index) => (
               <DropdownMenuItem key={index} asChild>
                 <HeaderNavLink href={item.path}>
-                  <User className="mr-2 h-4 w-4" />
+                  <item.icon className="mr-2 h-4 w-4" />
                   <span>{item.title}</span>
                 </HeaderNavLink>
               </DropdownMenuItem>

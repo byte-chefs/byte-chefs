@@ -32,9 +32,6 @@ importers:
       '@supabase/supabase-js':
         specifier: ^2.49.1
         version: 2.49.1
-      '@types/react-slick':
-        specifier: ^0.23.13
-        version: 0.23.13
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -102,6 +99,9 @@ importers:
       '@types/react-dom':
         specifier: ^19.0.4
         version: 19.0.4(@types/react@19.0.12)
+      '@types/react-slick':
+        specifier: ^0.23.13
+        version: 0.23.13
       eslint:
         specifier: ^9.21.0
         version: 9.22.0(jiti@2.4.2)
