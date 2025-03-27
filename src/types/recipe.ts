@@ -17,10 +17,12 @@ export type Recipes = Array<Recipe>
 
 export type RecipeCardProps = {
   recipe: Recipe
+  direction?: 'horizontal' | 'vertical'
 }
 
 export type RecipeListProps = {
   recipes: Recipes
+  direction?: 'horizontal' | 'vertical'
 }
 
 export type ToggleFavouriteProps = {

@@ -17,6 +17,7 @@ export const getRankedRecipes = cache(async (searchParams: Promise<TSearchParams
           gt: 0,
         },
       },
+      undefined,
       {
         favouritesTotal: 'desc',
       }
