@@ -4,7 +4,7 @@ import React, { FC, useState } from 'react'
 import { useFieldArray } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { createRecipeAction } from '@/actions/recipe/createRecipeAction'
-import { Plus, Trash2 } from 'lucide-react'
+import { Plus, Trash } from 'lucide-react'
 
 import {
   Form,
@@ -219,11 +219,11 @@ const CreateRecipeForm: FC<CreateRecipeFormProps> = ({ recipe, ingredients, tags
                   </div>
                   <Button
                     type="button"
-                    variant="transparent"
-                    className="mt-8 p-1"
+                    variant="destructive"
+                    className="mt-8"
                     onClick={() => remove(index)}
                   >
-                    <Trash2 size={18} className="text-destructive" />
+                    <Trash />
                   </Button>
                 </div>
               </div>

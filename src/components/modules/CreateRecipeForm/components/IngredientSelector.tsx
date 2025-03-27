@@ -274,7 +274,7 @@ export default function IngredientSelector({ value, onChange }: IngredientSelect
               <div>
                 <div className="font-medium">{ingredient?.name}</div>
               </div>
-              <Button onClick={() => handleRemoveIngredient(index)}>
+              <Button variant="destructive" onClick={() => handleRemoveIngredient(index)}>
                 <Trash className="h-4 w-4" />
               </Button>
             </div>

@@ -26,7 +26,7 @@ export default async function RecipeEditPage({
   const tags = await getRecipeTags(Number(recipeId))
 
   return (
-    <main>
+    <main className="flex-1">
       <h3 className="mt-5 text-center">Edit your recipe</h3>
       <CreateRecipeForm recipe={recipe} ingredients={ingredients} tags={tags} editMode={true} />
     </main>

@@ -79,15 +79,9 @@ export default function TagSelector({ value, onChange }: TagSelectorProps) {
                     onSelect={() => handleSelect(tag)}
                     className="flex items-center"
                   >
-                    <div
-                      className={`mr-2 flex h-4 w-4 items-center justify-center rounded-sm border ${
-                        selectedTags.some((selectedTag) => selectedTag.id === tag.id)
-                          ? 'bg-primary-default border-primary-default'
-                          : 'border-gray-300'
-                      }`}
-                    >
+                    <div className="mr-2 flex h-4 w-4 items-center justify-center rounded-sm border">
                       {selectedTags.some((selectedTag) => selectedTag.id === tag.id) && (
-                        <Check className="h-3 w-3 text-black" />
+                        <Check className="text-primary-default h-3 w-3 dark:text-white" />
                       )}
                     </div>
                     <span>{tag.name}</span>
@@ -105,7 +99,8 @@ export default function TagSelector({ value, onChange }: TagSelectorProps) {
             <Badge key={tag.id} variant="secondary" className="flex items-center gap-1">
               {tag.name}
               <Button
-                className="h-4 w-4 p-0 hover:bg-transparent"
+                variant="destructive"
+                className="h-4 w-4 p-0"
                 onClick={() => handleRemove(Number(tag.id))}
               >
                 <X className="h-3 w-3" />
