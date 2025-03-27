@@ -124,7 +124,7 @@
     --muted-foreground: var(--color-white-darker);
     --popover: var(--color-black-default);
     --popover-foreground: var(--color-white-darker);
-    --card: var(--color-black-lighter);
+    --card: #222222;
     --card-foreground: var(--color-white-darker);
   }
 }

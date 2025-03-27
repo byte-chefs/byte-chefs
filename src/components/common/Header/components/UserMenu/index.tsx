@@ -12,6 +12,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/DropdownMenu'
 import HeaderNavLink from '@/components/common/Header/components/HeaderNavLink'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/Avatar'
 import SignOutButton from './components/SignOutButton'
 import ROUTES from '@/app/constants/routes'
 import { privateHeaderNavItems } from '../../data'
@@ -29,7 +30,12 @@ const UserMenu: FC<Props> = (props) => {
         <DropdownMenu modal={false}>
           <DropdownMenuTrigger asChild>
             <Button className="relative h-10 w-10 rounded-full">
-              <User />
+              <Avatar>
+                <AvatarImage src={user.profileImage || undefined} />
+                <AvatarFallback>
+                  <User className="text-foreground" />
+                </AvatarFallback>
+              </Avatar>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="bg-background z-100">

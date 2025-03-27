@@ -1,9 +1,18 @@
-export const revalidate = 60
+import ProfileForm from '@/components/modules/profile/ProfileForm'
+import { CardContent, CardHeader, CardTitle } from '@/components/ui/Card'
+import { getAuthUserInfo } from '@/actions/auth/getAuthUserInfo'
 
 export default async function Profile() {
+  const user = await getAuthUserInfo()
+
   return (
     <>
-      <h2 className="mb-8 font-bold md:mb-12">Profile</h2>
+      <CardHeader>
+        <CardTitle>{user?.email}</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <ProfileForm isCreate />
+      </CardContent>
     </>
   )
 }
