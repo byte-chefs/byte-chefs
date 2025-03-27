@@ -2,16 +2,22 @@ import { FC } from 'react'
 import Image from 'next/image'
 
 type TitleSectionProps = {
-  name: string,
-  cookingTime: number,
-  difficulty: string,
-  personServing: number,
-  photo?: string | null,
-  user?: string,
+  name: string
+  cookingTime: number
+  difficulty: string
+  personServing: number
+  photo?: string | null
+  user?: string
 }
 
-const TitleRecipeSection: FC<TitleSectionProps> = ({ name, cookingTime, difficulty, photo, personServing, user }) => {
-
+const TitleRecipeSection: FC<TitleSectionProps> = ({
+  name,
+  cookingTime,
+  difficulty,
+  photo,
+  personServing,
+  user,
+}) => {
   return (
     <section className="text-black-default w-full bg-white px-4 pt-20 pb-24 sm:px-6 lg:px-8 lg:pt-32 lg:pb-40">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between lg:flex-row">
@@ -40,7 +46,7 @@ const TitleRecipeSection: FC<TitleSectionProps> = ({ name, cookingTime, difficul
         </div>
         <div className="w-content relative lg:w-3/7">
           <Image
-            src={photo ?? "/recipy-preview.png"}
+            src={photo ?? '/recipy-preview.png'}
             alt="Delicious Pasta"
             width={600}
             height={720}

@@ -1,3 +1,4 @@
+import { User, UtensilsCrossed, Heart, Plus } from 'lucide-react'
 import ROUTES from '@/app/constants/routes'
 
 export const publicHeaderNavItems = [
@@ -6,8 +7,8 @@ export const publicHeaderNavItems = [
 ]
 
 export const privateHeaderNavItems = [
-  { title: 'Profile', path: ROUTES.PROFILE },
-  { title: 'My Recipes', path: ROUTES.MY_RECIPES },
-  { title: 'Create Recipe', path: ROUTES.RECIPE_CREATE },
-  { title: 'Favourites Recipes', path: ROUTES.FAVOURITES },
+  { title: 'Profile', path: ROUTES.PROFILE, icon: User },
+  { title: 'My Recipes', path: ROUTES.MY_RECIPES, icon: UtensilsCrossed },
+  { title: 'Create Recipe', path: ROUTES.RECIPE_CREATE, icon: Plus },
+  { title: 'Favourite Recipes', path: ROUTES.FAVOURITES, icon: Heart },
 ]

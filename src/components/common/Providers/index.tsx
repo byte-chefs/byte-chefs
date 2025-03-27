@@ -7,7 +7,11 @@ type Props = {
 }
 
 const Providers = ({ children }: Props) => {
-  return <ThemeProvider enableColorScheme={false}>{children}</ThemeProvider>
+  return (
+    <ThemeProvider enableColorScheme={false} defaultTheme="light">
+      {children}
+    </ThemeProvider>
+  )
 }
 
 export default Providers

@@ -31,16 +31,16 @@ type IngredientSelectorProps = {
 }
 
 type SelectedServing = {
-  serving_id: string,
-  serving_description: string,
-  calories: number,
-  protein: number,
-  carbohydrate: number,
+  serving_id: string
+  serving_description: string
+  calories: number
+  protein: number
+  carbohydrate: number
   fat: number
 } | null
 
 type SelectedFood = {
-  food_id: string,
+  food_id: string
   food_name: string
 } | null
 
@@ -115,7 +115,7 @@ export default function IngredientSelector({ value, onChange }: IngredientSelect
       protein: Number(selectedServing.protein),
       carbs: Number(selectedServing.carbohydrate),
       fat: Number(selectedServing.fat),
-      foodName: selectedFood.food_name
+      foodName: selectedFood.food_name,
     })
 
     setIngredients([...ingredients, newIngredient])
@@ -220,7 +220,10 @@ export default function IngredientSelector({ value, onChange }: IngredientSelect
                               </SelectTrigger>
                               <SelectContent>
                                 {servings.map((serving) => (
-                                  <SelectItem key={serving?.serving_id} value={String(serving?.serving_id)}>
+                                  <SelectItem
+                                    key={serving?.serving_id}
+                                    value={String(serving?.serving_id)}
+                                  >
                                     {serving?.serving_description}
                                   </SelectItem>
                                 ))}
@@ -269,9 +272,7 @@ export default function IngredientSelector({ value, onChange }: IngredientSelect
           {ingredients.map((ingredient, index) => (
             <div key={index} className="flex items-center justify-between rounded-md border p-3">
               <div>
-                <div className="font-medium">
-                 {ingredient?.name}
-                </div>
+                <div className="font-medium">{ingredient?.name}</div>
               </div>
               <Button onClick={() => handleRemoveIngredient(index)}>
                 <Trash className="h-4 w-4" />

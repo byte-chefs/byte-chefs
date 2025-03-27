@@ -18,7 +18,7 @@ export const editRecipeSchema = z.object({
         foodId: z.number(),
         servingId: z.number(),
         quantity: z.number(),
-        name: z.string()
+        name: z.string(),
       })
     )
     .min(1, 'At least one ingredient is required'),

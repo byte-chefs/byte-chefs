@@ -12,7 +12,8 @@ export const createRecipeAction = actionClient
     handleValidationErrorsShape: async (ve) => flattenValidationErrors(ve).fieldErrors,
   })
   .action(async ({ parsedInput }) => {
-    const { name, cookingTime, description, difficulty, ingredients, status, tags, photo } = parsedInput
+    const { name, cookingTime, description, difficulty, ingredients, status, tags, photo } =
+      parsedInput
     const user = await getAuthUserInfo()
 
     if (!user) {
@@ -30,33 +31,34 @@ export const createRecipeAction = actionClient
           status: status,
           userId: user.id,
           ingredients: {
-            create: ingredients.map(ingredient => ({
+            create: ingredients.map((ingredient) => ({
               foodId: ingredient.foodId,
               servingId: ingredient.servingId,
               quantity: ingredient.quantity,
               name: ingredient.name,
-            }))
+            })),
           },
-          ...(tags && tags.length > 0 && {
-            tags: {
-              create: tags.map(tag => ({
-                tag: {
-                  connect: {
-                    id: Number(tag.id)
-                  }
-                }
-              }))
-            }
-          })
+          ...(tags &&
+            tags.length > 0 && {
+              tags: {
+                create: tags.map((tag) => ({
+                  tag: {
+                    connect: {
+                      id: Number(tag.id),
+                    },
+                  },
+                })),
+              },
+            }),
         },
         include: {
           ingredients: true,
           tags: {
             include: {
-              tag: true
-            }
-          }
-        }
+              tag: true,
+            },
+          },
+        },
       })
       return { success: true, recipe }
     } catch (error) {

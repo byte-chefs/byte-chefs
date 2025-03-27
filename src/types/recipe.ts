@@ -15,22 +15,24 @@ export type Recipe = {
 }
 
 export type Ingredient = {
-  id?: number;
-  recipeId?: number;
-  name?: string | null;
-  foodId?: number;
-  quantity?: number;
-  servingId?: number;
+  id?: number
+  recipeId?: number
+  name?: string | null
+  foodId?: number
+  quantity?: number
+  servingId?: number
 }
 
 export type Recipes = Array<Recipe>
 
 export type RecipeCardProps = {
   recipe: Recipe
+  direction?: 'horizontal' | 'vertical'
 }
 
 export type RecipeListProps = {
   recipes: Recipes
+  direction?: 'horizontal' | 'vertical'
 }
 
 export type ToggleFavouriteProps = {
@@ -48,18 +50,17 @@ export type RecipeOverviewProps = {
 export enum RecipeDifficultyEnum {
   easy = 'easy',
   medium = 'medium',
-  hard = 'hard'
+  hard = 'hard',
 }
 
 export enum RecipeStatusEnum {
   draft = 'draft',
   published = 'published',
-
 }
 
 export type Tag = {
-  id: number | string,
-  name: string,
-  exclude?: number[] | string[],
-  include?: number[] | string[],
+  id: number | string
+  name: string
+  exclude?: number[] | string[]
+  include?: number[] | string[]
 }

@@ -22,7 +22,6 @@ type TagSelectorProps = {
 }
 
 export default function TagSelector({ value, onChange }: TagSelectorProps) {
-
   const [open, setOpen] = useState(false)
   const [tags, setTags] = useState<Tag[]>([])
   const [selectedTags, setSelectedTags] = useState<Tag[]>(value || [])
@@ -33,8 +32,8 @@ export default function TagSelector({ value, onChange }: TagSelectorProps) {
 
   useEffect(() => {
     async function fetchTags() {
-      const tags = await getTags();
-      setTags(tags);
+      const tags = await getTags()
+      setTags(tags)
     }
 
     fetchTags()
@@ -54,7 +53,9 @@ export default function TagSelector({ value, onChange }: TagSelectorProps) {
     setSelectedTags((prev) => prev.filter((tag) => tag.id !== tagId))
   }
 
-  const selectedTagObjects = tags.filter((tag) => selectedTags.some((selectedTag)=> selectedTag.id === tag.id))
+  const selectedTagObjects = tags.filter((tag) =>
+    selectedTags.some((selectedTag) => selectedTag.id === tag.id)
+  )
 
   return (
     <div className="space-y-4">
@@ -85,7 +86,9 @@ export default function TagSelector({ value, onChange }: TagSelectorProps) {
                           : 'border-gray-300'
                       }`}
                     >
-                      {selectedTags.some((selectedTag) => selectedTag.id === tag.id) && <Check className="h-3 w-3 text-black" />}
+                      {selectedTags.some((selectedTag) => selectedTag.id === tag.id) && (
+                        <Check className="h-3 w-3 text-black" />
+                      )}
                     </div>
                     <span>{tag.name}</span>
                   </CommandItem>

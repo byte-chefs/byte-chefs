@@ -12,17 +12,8 @@ export const editRecipeAction = actionClient
     handleValidationErrorsShape: async (ve) => flattenValidationErrors(ve).fieldErrors,
   })
   .action(async ({ parsedInput }) => {
-    const {
-      id,
-      name,
-      cookingTime,
-      description,
-      difficulty,
-      ingredients,
-      status,
-      tags,
-      photo,
-    } = parsedInput
+    const { id, name, cookingTime, description, difficulty, ingredients, status, tags, photo } =
+      parsedInput
 
     const user = await getUserInfo()
 
@@ -31,10 +22,9 @@ export const editRecipeAction = actionClient
     }
 
     try {
-
       const existingRecipe = await prisma.recipe.findUnique({
         where: { id },
-        include: { ingredients: true, tags: true }
+        include: { ingredients: true, tags: true },
       })
 
       if (!existingRecipe) {
@@ -45,27 +35,27 @@ export const editRecipeAction = actionClient
         throw new Error('You do not have permission to edit this recipe')
       }
 
-      const existingIngredientIds = existingRecipe.ingredients.map(ingregient => ingregient.id)
+      const existingIngredientIds = existingRecipe.ingredients.map((ingregient) => ingregient.id)
       const updatedIngredientIds = ingredients
-        .filter(ingregient => ingregient.id)
-        .map(ingregient => ingregient.id)
+        .filter((ingregient) => ingregient.id)
+        .map((ingregient) => ingregient.id)
 
       const ingredientsToDelete = existingIngredientIds.filter(
-        id => !updatedIngredientIds.includes(id)
+        (id) => !updatedIngredientIds.includes(id)
       )
 
-      const existingTagIds = existingRecipe.tags.map(tag => tag.tagId)
-      const updatedTagIds = tags ? tags.map(tag => parseInt(tag.id.toString())) : []
+      const existingTagIds = existingRecipe.tags.map((tag) => tag.tagId)
+      const updatedTagIds = tags ? tags.map((tag) => parseInt(tag.id.toString())) : []
 
-      const tagsToRemove = existingTagIds.filter(id => !updatedTagIds.includes(id))
-      const tagsToAdd = updatedTagIds.filter(id => !existingTagIds.includes(id))
+      const tagsToRemove = existingTagIds.filter((id) => !updatedTagIds.includes(id))
+      const tagsToAdd = updatedTagIds.filter((id) => !existingTagIds.includes(id))
 
       const updatedRecipe = await prisma.$transaction(async (tx) => {
         if (ingredientsToDelete.length > 0) {
           await tx.ingredient.deleteMany({
             where: {
-              id: { in: ingredientsToDelete }
-            }
+              id: { in: ingredientsToDelete },
+            },
           })
         }
 
@@ -73,8 +63,8 @@ export const editRecipeAction = actionClient
           await tx.recipeTag.deleteMany({
             where: {
               recipeId: id,
-              tagId: { in: tagsToRemove }
-            }
+              tagId: { in: tagsToRemove },
+            },
           })
         }
 
@@ -89,22 +79,22 @@ export const editRecipeAction = actionClient
             status,
             ...(tags && {
               tags: {
-                create: tagsToAdd.map(tagId => ({
+                create: tagsToAdd.map((tagId) => ({
                   tag: {
-                    connect: { id: tagId }
-                  }
-                }))
-              }
-            })
+                    connect: { id: tagId },
+                  },
+                })),
+              },
+            }),
           },
           include: {
             ingredients: true,
             tags: {
               include: {
-                tag: true
-              }
-            }
-          }
+                tag: true,
+              },
+            },
+          },
         })
 
         for (const ingredient of ingredients) {
@@ -115,8 +105,8 @@ export const editRecipeAction = actionClient
                 foodId: ingredient.foodId,
                 servingId: ingredient.servingId,
                 quantity: ingredient.quantity,
-                name: ingredient.name
-              }
+                name: ingredient.name,
+              },
             })
           } else {
             await tx.ingredient.create({
@@ -125,8 +115,8 @@ export const editRecipeAction = actionClient
                 servingId: ingredient.servingId,
                 quantity: ingredient.quantity,
                 name: ingredient.name,
-                recipeId: Number(id)
-              }
+                recipeId: Number(id),
+              },
             })
           }
         }

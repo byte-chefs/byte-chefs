@@ -6,8 +6,21 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { createRecipeAction } from '@/actions/recipe/createRecipeAction'
 import { Plus, Trash2 } from 'lucide-react'
 
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/Form'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/Select'
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/Form'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/Select'
 import { Input } from '@/components/ui/Input'
 import { Spinner } from '@/components/ui/Spinner'
 import ROUTES from '@/app/constants/routes'
@@ -24,7 +37,7 @@ import { editRecipeAction } from '@/actions/recipe/editRecipeAction'
 import { editRecipeSchema } from '@/schemas/recipe/editRecipeSchema'
 import RecipeImageUpload from '@/components/modules/CreateRecipeForm/components/RecipeImageUpload'
 
-type CreateRecipeFormProps =  {
+type CreateRecipeFormProps = {
   recipe?: Recipe
   tags?: Tag[]
   ingredients?: Ingredient[]
@@ -32,11 +45,13 @@ type CreateRecipeFormProps =  {
 }
 const CreateRecipeForm: FC<CreateRecipeFormProps> = ({ recipe, ingredients, tags, editMode }) => {
   const router = useRouter()
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
   const currentSafeAction = editMode
     ? (editRecipeAction as typeof createRecipeAction)
-    : createRecipeAction;
-  const currentSchema = editMode ? editRecipeSchema : (createRecipeSchema as typeof editRecipeSchema);
+    : createRecipeAction
+  const currentSchema = editMode
+    ? editRecipeSchema
+    : (createRecipeSchema as typeof editRecipeSchema)
   const { form, handleSubmitWithAction } = useHookFormAction(
     currentSafeAction,
     zodResolver(currentSchema),
@@ -48,13 +63,13 @@ const CreateRecipeForm: FC<CreateRecipeFormProps> = ({ recipe, ingredients, tags
           name: recipe?.name || '',
           cookingTime: recipe?.cookingTime || 0,
           description: recipe?.description || [''],
-          difficulty: recipe?.difficulty as RecipeDifficultyEnum || RecipeDifficultyEnum.easy,
-          ingredients: (ingredients || []).map(ingredient => ({
+          difficulty: (recipe?.difficulty as RecipeDifficultyEnum) || RecipeDifficultyEnum.easy,
+          ingredients: (ingredients || []).map((ingredient) => ({
             ...ingredient,
             name: ingredient.name ?? undefined,
           })),
           tags: tags || [],
-          status: recipe?.status as RecipeStatusEnum || 'draft',
+          status: (recipe?.status as RecipeStatusEnum) || 'draft',
         },
       },
       actionProps: {
@@ -86,20 +101,17 @@ const CreateRecipeForm: FC<CreateRecipeFormProps> = ({ recipe, ingredients, tags
   }
 
   return (
-    <div className="m-auto max-w-[500px] py-4 px-4">
+    <div className="m-auto max-w-[500px] px-4 py-4">
       <Form {...form}>
         <form onSubmit={handleSubmit} className="space-y-8">
           <FormField
             control={form.control}
             name="photo"
-            render={({field}) => (
+            render={({ field }) => (
               <FormItem>
                 <FormLabel>Recipe Image</FormLabel>
                 <FormControl>
-                  <RecipeImageUpload
-                        value={field.value}
-                        onChange={field.onChange}
-                      />
+                  <RecipeImageUpload value={field.value} onChange={field.onChange} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -119,60 +131,62 @@ const CreateRecipeForm: FC<CreateRecipeFormProps> = ({ recipe, ingredients, tags
               </FormItem>
             )}
           />
-              <FormField
-                control={form.control}
-                name="id"
-                render={({ field }) => (
-                  <input type="hidden" {...field} />
-                )}
-              />
+          <FormField
+            control={form.control}
+            name="id"
+            render={({ field }) => <input type="hidden" {...field} />}
+          />
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-              <FormField
-                control={form.control}
-                name="cookingTime"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Cooking Time (minutes)</FormLabel>
-                    <FormControl>
-                      <Input type="number" {...field}  onChange={(e) => field.onChange(e.target.value ? +e.target.value : 0)} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+            <FormField
+              control={form.control}
+              name="cookingTime"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Cooking Time (minutes)</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="number"
+                      {...field}
+                      onChange={(e) => field.onChange(e.target.value ? +e.target.value : 0)}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-              <FormField
-                control={form.control}
-                name="difficulty"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Difficulty</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select difficulty" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="easy">Easy</SelectItem>
-                        <SelectItem value="medium">Medium</SelectItem>
-                        <SelectItem value="hard">Hard</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+            <FormField
+              control={form.control}
+              name="difficulty"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Difficulty</FormLabel>
+                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select difficulty" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="easy">Easy</SelectItem>
+                      <SelectItem value="medium">Medium</SelectItem>
+                      <SelectItem value="hard">Hard</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
           </div>
 
           <div>
-            <div className="flex items-center justify-between mb-2">
+            <div className="mb-2 flex items-center justify-between">
               <FormLabel>Recipe Steps</FormLabel>
               <Button
                 type="button"
                 variant="outline"
                 onClick={() => append('')}
-                className="flex items-center gap-1 cursor-pointer"
+                className="flex cursor-pointer items-center gap-1"
               >
                 <Plus size={16} />
                 Add Step
@@ -188,8 +202,8 @@ const CreateRecipeForm: FC<CreateRecipeFormProps> = ({ recipe, ingredients, tags
                       name={`description.${index}`}
                       render={({ field }) => (
                         <FormItem>
-                          <div className="flex items-center gap-2 mb-1">
-                            <FormLabel className="text-lg mb-0">Step {index + 1}</FormLabel>
+                          <div className="mb-1 flex items-center gap-2">
+                            <FormLabel className="mb-0 text-lg">Step {index + 1}</FormLabel>
                           </div>
                           <FormControl>
                             <Textarea
@@ -215,8 +229,10 @@ const CreateRecipeForm: FC<CreateRecipeFormProps> = ({ recipe, ingredients, tags
               </div>
             ))}
             {fields.length === 0 && (
-              <div className="text-center py-4 border border-dashed rounded-md">
-                <p className="text-muted-foreground">No steps added yet. Click &#34;Add Step&#34; to begin.</p>
+              <div className="rounded-md border border-dashed py-4 text-center">
+                <p className="text-muted-foreground">
+                  No steps added yet. Click &#34;Add Step&#34; to begin.
+                </p>
               </div>
             )}
           </div>
@@ -225,12 +241,14 @@ const CreateRecipeForm: FC<CreateRecipeFormProps> = ({ recipe, ingredients, tags
             control={form.control}
             name="ingredients"
             render={({ field }) => {
-              return <FormItem>
-                <FormControl>
-                  <IngredientSelector value={field.value} onChange={field.onChange} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
+              return (
+                <FormItem>
+                  <FormControl>
+                    <IngredientSelector value={field.value} onChange={field.onChange} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )
             }}
           />
 
@@ -279,8 +297,10 @@ const CreateRecipeForm: FC<CreateRecipeFormProps> = ({ recipe, ingredients, tags
                 <>
                   <Spinner className="mr-2" /> {editMode ? 'Editing...' : 'Creating...'}
                 </>
+              ) : editMode ? (
+                'Edit Recipe'
               ) : (
-                editMode ? 'Edit Recipe' : 'Create Recipe'
+                'Create Recipe'
               )}
             </Button>
           </div>

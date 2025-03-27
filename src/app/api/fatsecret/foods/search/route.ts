@@ -26,13 +26,13 @@ export async function GET(request: Request) {
     const data = {
       method: 'foods.search',
       search_expression: query,
-      format: 'json'
+      format: 'json',
     }
 
     const request_data = {
       url: FATSECRET_API_URL,
       method: 'GET',
-      data: data
+      data: data,
     }
 
     const oauthParams = oauth.authorize(request_data)
@@ -47,8 +47,8 @@ export async function GET(request: Request) {
     const response = await fetch(url.toString(), {
       method: 'GET',
       headers: {
-        'Accept': 'application/json'
-      }
+        Accept: 'application/json',
+      },
     })
 
     if (!response.ok) {
@@ -65,10 +65,13 @@ export async function GET(request: Request) {
       const text = await response.text()
       console.log('XML Response:', text)
 
-      return NextResponse.json({
-        error: 'Received XML instead of JSON',
-        message: 'The API returned XML despite requesting JSON format'
-      }, { status: 500 })
+      return NextResponse.json(
+        {
+          error: 'Received XML instead of JSON',
+          message: 'The API returned XML despite requesting JSON format',
+        },
+        { status: 500 }
+      )
     }
   } catch (error) {
     console.error('Error searching foods:', error)

@@ -5,8 +5,12 @@ import CreateRecipeForm from '@/components/modules/CreateRecipeForm'
 import { Ingredient } from '@/types'
 import { getRecipeTags } from '@/actions/tags/getRecipeTags'
 
-export default async function RecipeEditPage({ params }: { params: Promise<{ recipeId: string }> }) {
-  const { recipeId } = await params;
+export default async function RecipeEditPage({
+  params,
+}: {
+  params: Promise<{ recipeId: string }>
+}) {
+  const { recipeId } = await params
 
   if (!recipeId) {
     return notFound()
@@ -18,12 +22,12 @@ export default async function RecipeEditPage({ params }: { params: Promise<{ rec
     return notFound()
   }
 
-  const ingredients: Ingredient[] = await getIngredients(Number(recipeId));
-  const tags = await getRecipeTags(Number(recipeId));
+  const ingredients: Ingredient[] = await getIngredients(Number(recipeId))
+  const tags = await getRecipeTags(Number(recipeId))
 
   return (
     <main>
-      <h3 className="text-center mt-5">Edit your recipe</h3>
+      <h3 className="mt-5 text-center">Edit your recipe</h3>
       <CreateRecipeForm recipe={recipe} ingredients={ingredients} tags={tags} editMode={true} />
     </main>
   )

@@ -14,8 +14,8 @@ const oauth = new OAuth({
   },
 })
 
-export async function GET(request: Request, { params }: { params:  Promise<{ id: string }> }) {
-  const { id } = await params;
+export async function GET(request: Request, { params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
 
   if (!id) {
     return NextResponse.json({ error: 'Food ID is required' }, { status: 400 })
@@ -25,13 +25,13 @@ export async function GET(request: Request, { params }: { params:  Promise<{ id:
     const data = {
       method: 'food.get',
       food_id: id,
-      format: 'json'
+      format: 'json',
     }
 
     const request_data = {
       url: FATSECRET_API_URL,
       method: 'GET',
-      data: data
+      data: data,
     }
 
     const oauthParams = oauth.authorize(request_data)
@@ -45,8 +45,8 @@ export async function GET(request: Request, { params }: { params:  Promise<{ id:
     const response = await fetch(url.toString(), {
       method: 'GET',
       headers: {
-        'Accept': 'application/json'
-      }
+        Accept: 'application/json',
+      },
     })
 
     if (!response.ok) {
@@ -63,10 +63,13 @@ export async function GET(request: Request, { params }: { params:  Promise<{ id:
       const text = await response.text()
       console.log('XML Response:', text)
 
-      return NextResponse.json({
-        error: 'Received XML instead of JSON',
-        message: 'The API returned XML despite requesting JSON format'
-      }, { status: 500 })
+      return NextResponse.json(
+        {
+          error: 'Received XML instead of JSON',
+          message: 'The API returned XML despite requesting JSON format',
+        },
+        { status: 500 }
+      )
     }
   } catch (error) {
     console.error('Error getting food details:', error)

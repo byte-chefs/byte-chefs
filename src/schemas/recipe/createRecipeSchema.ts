@@ -17,7 +17,7 @@ export const createRecipeSchema = z.object({
         foodId: z.number(),
         quantity: z.number(),
         servingId: z.number(),
-        name: z.string()
+        name: z.string(),
       })
     )
     .min(1, 'At least one ingredient is required'),
@@ -32,4 +32,4 @@ export const createRecipeSchema = z.object({
   status: z.enum(['draft', 'published'], {
     required_error: 'Please select a status',
   }),
-});
+})

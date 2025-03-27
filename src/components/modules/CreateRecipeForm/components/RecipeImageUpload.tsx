@@ -21,7 +21,7 @@ export default function RecipeImageUpload({ value, onChange }: RecipeImageUpload
     if (!file) return
 
     if (file.size > 5 * 1024 * 1024) {
-      toast.error('File too large: Image must be less than 5MB');
+      toast.error('File too large: Image must be less than 5MB')
       return
     }
 
@@ -44,7 +44,7 @@ export default function RecipeImageUpload({ value, onChange }: RecipeImageUpload
 
       reader.readAsDataURL(file)
     } catch (error) {
-      console.log(error);
+      console.log(error)
       toast.error('Upload failed: Something went wrong. Please try again.')
       setIsUploading(false)
     }
@@ -55,7 +55,7 @@ export default function RecipeImageUpload({ value, onChange }: RecipeImageUpload
   }
 
   return (
-    <div className="space-y-4 relative">
+    <div className="relative space-y-4">
       {value ? (
         <div className="relative">
           <img
@@ -63,11 +63,7 @@ export default function RecipeImageUpload({ value, onChange }: RecipeImageUpload
             alt="Recipe"
             className="h-[300px] w-full rounded-lg object-cover"
           />
-          <Button
-            variant="transparent"
-            className="absolute top-2 right-2"
-            onClick={handleRemove}
-          >
+          <Button variant="transparent" className="absolute top-2 right-2" onClick={handleRemove}>
             <X className="h-4 w-4" />
           </Button>
         </div>
