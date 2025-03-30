@@ -1,7 +1,10 @@
 import { FC } from 'react'
 import Image from 'next/image'
+import FavoriteToggle from '@/components/recipe/chunks/FavoriteToggle'
+import { checkIsFavourite } from '@/actions/recipes/checkIsFavourite'
 
 type TitleSectionProps = {
+  id: number
   name: string
   cookingTime: number
   difficulty: string
@@ -10,7 +13,8 @@ type TitleSectionProps = {
   user?: string
 }
 
-const TitleRecipeSection: FC<TitleSectionProps> = ({
+const TitleRecipeSection: FC<TitleSectionProps> = async ({
+  id,
   name,
   cookingTime,
   difficulty,
@@ -18,6 +22,7 @@ const TitleRecipeSection: FC<TitleSectionProps> = ({
   personServing,
   user,
 }) => {
+  const { favorited } = await checkIsFavourite(id)
   return (
     <section className="text-black-default w-full bg-white px-4 pt-20 pb-24 sm:px-6 lg:px-8 lg:pt-32 lg:pb-40">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between lg:flex-row">
@@ -42,6 +47,12 @@ const TitleRecipeSection: FC<TitleSectionProps> = ({
                 For {personServing} people
               </div>
             )}
+
+            <FavoriteToggle
+              recipeId={id}
+              initialIsFavorite={favorited}
+              className="hidden lg:inline-flex"
+            />
           </div>
         </div>
         <div className="w-content relative lg:w-3/7">
@@ -58,9 +69,11 @@ const TitleRecipeSection: FC<TitleSectionProps> = ({
           </div>
         </div>
 
-        <button className="border-primary-lighter text-primary-lighter mt-3.5 block cursor-pointer border-b-2 p-2.5 lg:hidden">
-          Add to favorites
-        </button>
+        <FavoriteToggle
+          recipeId={id}
+          initialIsFavorite={favorited}
+          className="inline-flex lg:hidden"
+        />
       </div>
     </section>
   )

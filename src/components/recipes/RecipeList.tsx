@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import { RecipeListProps } from '@/types'
 import RecipeCard from './RecipeCard'
+import NoDataPreview from './chunks/NoDataPreview'
 
 const RecipeList: FC<RecipeListProps> = ({ recipes, direction = 'vertical' }) => {
   return recipes.length > 0 ? (
@@ -10,7 +11,7 @@ const RecipeList: FC<RecipeListProps> = ({ recipes, direction = 'vertical' }) =>
       ))}
     </div>
   ) : (
-    <h3 className="bold text-center">No data</h3>
+    <NoDataPreview />
   )
 }
 
