@@ -1,5 +1,3 @@
-'use client'
-
 import { FC } from 'react'
 import { RecipeCardProps } from '@/types'
 import Image from 'next/image'
@@ -9,7 +7,7 @@ import { cn } from '@/lib/utils'
 
 const RecipeCard: FC<RecipeCardProps> = ({ recipe, direction = 'vertical' }) => {
   return (
-    <Link href={`/recipes/${recipe.id}`} className="w-full" onDragEnd={(e) => e.preventDefault()}>
+    <Link href={`/recipes/${recipe.id}`} className="w-full">
       <div
         className={cn(
           'relative w-full overflow-hidden rounded-xl shadow-2xl transition hover:scale-103 md:rounded-3xl',

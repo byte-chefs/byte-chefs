@@ -7,6 +7,7 @@ import SearchInput from '@/components/common/Search'
 import { TProps } from '@/types/pageProps'
 import TagsSelector from '@/components/common/Selectors/TagsSelector'
 import DifficultySelector from '@/components/common/Selectors/DifficultySelector'
+import Sorting from '@/components/common/Sortings/Sorting'
 
 export const revalidate = 60
 
@@ -23,6 +24,7 @@ export default async function RecipesListingPage(props: TProps) {
           <PerPageSelector />
           <TagsSelector tags={tags} />
           <DifficultySelector />
+          <Sorting />
         </div>
         <RecipeList recipes={data} />
         <Pagination totalPages={totalPages} />

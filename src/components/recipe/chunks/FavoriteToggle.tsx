@@ -45,12 +45,12 @@ export default function FavoriteToggle({
     >
       {isFavorite ? (
         <>
-          <Heart fill="currentColor" />
+          <HeartOff />
           Remove from favorites
         </>
       ) : (
         <>
-          <HeartOff />
+          <Heart fill="currentColor" />
           Add to favorites
         </>
       )}

@@ -5,6 +5,7 @@ import PerPageSelector from '@/components/common/Pagination/PerPageSelector'
 import SearchInput from '@/components/common/Search'
 import DifficultySelector from '@/components/common/Selectors/DifficultySelector'
 import TagsSelector from '@/components/common/Selectors/TagsSelector'
+import Sorting from '@/components/common/Sortings/Sorting'
 import RecipeList from '@/components/recipes/RecipeList'
 import { TProps } from '@/types/pageProps'
 
@@ -22,6 +23,7 @@ export default async function MyRecepiesPage(props: TProps) {
         <PerPageSelector />
         <TagsSelector tags={tags} />
         <DifficultySelector />
+        <Sorting />
       </div>
       <RecipeList recipes={data} />
       <Pagination totalPages={totalPages} />

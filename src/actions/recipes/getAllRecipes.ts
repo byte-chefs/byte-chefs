@@ -5,7 +5,7 @@ import { TSearchParams } from '@/types/pageProps'
 import getPaginatedData from '../heplers/getPaginatedData'
 
 export const getAllRecipes = cache(async (searchParams: Promise<TSearchParams>) => {
-  const { page, perPage, tags, difficultyLevel, search } = await searchParams
+  const { page, perPage, tags, difficultyLevel, search, sortBy } = await searchParams
 
   try {
     const tagIds = tags
@@ -14,6 +14,7 @@ export const getAllRecipes = cache(async (searchParams: Promise<TSearchParams>) 
       .filter(Boolean)
 
     const where: Record<string, unknown> = {}
+    const orderBy: Record<string, 'asc' | 'desc'> = {}
 
     if (tagIds?.length) {
       where.tags = {
@@ -34,7 +35,22 @@ export const getAllRecipes = cache(async (searchParams: Promise<TSearchParams>) 
       }
     }
 
-    const { data, totalPages } = await getPaginatedData('recipe', page, perPage, where)
+    if (sortBy) {
+      if (sortBy === 'asc' || sortBy === 'desc') {
+        orderBy.name = sortBy
+      } else {
+        orderBy.createdAt = sortBy === 'newest' ? 'asc' : 'desc'
+      }
+    }
+
+    const { data, totalPages } = await getPaginatedData(
+      'recipe',
+      page,
+      perPage,
+      where,
+      undefined,
+      orderBy
+    )
 
     return { data, totalPages }
   } catch (error) {

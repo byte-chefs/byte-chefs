@@ -1,8 +1,7 @@
 'use client'
 
 import { DEFAULT_PAGE } from '@/app/constants/pagination'
-import useSearchAndFiltering from '@/hooks/useSearchAndFiltering'
-import { useSearchParams } from 'next/navigation'
+import useNavigation from '@/hooks/useNavigation'
 import React, { useCallback } from 'react'
 import ReactPaginate from 'react-paginate'
 
@@ -15,14 +14,18 @@ type PaginationEvent = {
 }
 
 const Pagination = ({ totalPages }: PaginationProps) => {
-  const searchParams = useSearchParams()
-  const { handlePageSet } = useSearchAndFiltering()
+  const { searchParams, router, pathname } = useNavigation()
+  const params = new URLSearchParams(String(searchParams))
   const currentPage = searchParams.get('page') || DEFAULT_PAGE
 
-  const handlePageClick = useCallback((event: PaginationEvent) => {
-    const selectedPage = event.selected + 1
-    handlePageSet(selectedPage.toString())
-  }, [])
+  const handlePageClick = useCallback(
+    (event: PaginationEvent) => {
+      const selectedPage = event.selected + 1
+      params.set('page', selectedPage.toString())
+      router.replace(`${pathname}?${params.toString()}`)
+    },
+    [pathname, params]
+  )
 
   if (totalPages < 2) {
     return null
