@@ -38,6 +38,7 @@ export type RecipeListProps = {
 export type ToggleFavouriteProps = {
   recipeId: number
   initialIsFavorite: boolean
+  className?: string
 }
 
 export type RecipeOverviewProps = {

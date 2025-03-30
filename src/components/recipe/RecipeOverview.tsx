@@ -6,7 +6,7 @@ import RelatedRecipeSection from '@/components/recipe/sections/RelatedRecipeSect
 import TitleRecipeSection from '@/components/recipe/sections/TitleRecipeSection'
 
 const RecipeOverview: FC<RecipeOverviewProps> = ({ recipe, ingredients, tags, user }) => {
-  const { name, cookingTime, description, difficulty, personServing, photo } = recipe
+  const { name, cookingTime, description, difficulty, personServing, photo, id } = recipe
 
   return (
     <div className="space-y-6">
@@ -17,6 +17,7 @@ const RecipeOverview: FC<RecipeOverviewProps> = ({ recipe, ingredients, tags, us
         photo={photo}
         personServing={personServing}
         user={user}
+        id={id}
       />
       <WhatsInsideSection ingredients={ingredients} tags={tags} />
       <StepsSection steps={description} />
