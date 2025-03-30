@@ -3,6 +3,7 @@
 import { Input } from '@/components/ui/Input'
 import useDebounce from '@/hooks/useDebounce'
 import useSearchAndFiltering from '@/hooks/useSearchAndFiltering'
+import { useSearchParams } from 'next/navigation'
 import * as React from 'react'
 import { ChangeEvent, useEffect } from 'react'
 
@@ -17,11 +18,17 @@ const SearchInput: React.FC<SearchInputType> = ({
 }) => {
   const [searchValue, setSearchValue] = React.useState('')
   const debouncedValue = useDebounce(searchValue, 300)
+  const searchParams = useSearchParams()
+  const initialSearch = searchParams.get('search') || ''
   const { handleSearch } = useSearchAndFiltering()
 
   useEffect(() => {
     handleSearch('search')({ target: { value: debouncedValue } } as ChangeEvent<HTMLInputElement>)
   }, [debouncedValue])
+
+  useEffect(() => {
+    setSearchValue(initialSearch)
+  }, [initialSearch])
 
   return (
     <div>

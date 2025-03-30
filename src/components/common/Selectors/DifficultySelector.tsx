@@ -25,7 +25,7 @@ const DifficultySelector = () => {
   const currentValue = options.find((opt) => opt.value === currentPage)
 
   return (
-    <div>
+    <div key={searchParams.toString()}>
       <label
         htmlFor="difficulty-level"
         className="text-black-lighter mb-2 block text-sm font-medium"

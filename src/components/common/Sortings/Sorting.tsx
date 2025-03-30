@@ -24,7 +24,7 @@ const Sorting = () => {
   const currentValue = options.find((opt) => opt.value === currentPage)
 
   return (
-    <div className="md:w-40">
+    <div className="md:w-40" key={searchParams.toString()}>
       <label htmlFor="sort" className="text-black-lighter mb-2 block text-sm font-medium">
         Sort by
       </label>

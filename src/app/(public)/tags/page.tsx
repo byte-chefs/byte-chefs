@@ -1,5 +1,6 @@
 import { getRecipesByTag } from '@/actions/recipes/getRecipesByTag'
 import { getAllTags } from '@/actions/tags/getAllTags'
+import ClearButton from '@/components/common/ClearButton'
 import Pagination from '@/components/common/Pagination'
 import PerPageSelector from '@/components/common/Pagination/PerPageSelector'
 import SearchInput from '@/components/common/Search'
@@ -30,6 +31,7 @@ export default async function TagsListingPage(props: TProps) {
         <div className="mb-8 flex flex-col gap-2 md:flex-row md:gap-5">
           <SearchInput label="Search by tag" />
           <PerPageSelector />
+          <ClearButton />
         </div>
         <TagsList tags={tags} />
         <Pagination totalPages={totalPages} />
