@@ -7,6 +7,8 @@ import { TSearchParams } from '@/types/pageProps'
 import { getTagById } from '@/actions/tags/getTagById'
 import SearchInput from '@/components/common/Search'
 import DifficultySelector from '@/components/common/Selectors/DifficultySelector'
+import Sorting from '@/components/common/Sortings/Sorting'
+import ClearButton from '@/components/common/ClearButton'
 
 export default async function RecipePage({
   params,
@@ -36,6 +38,8 @@ export default async function RecipePage({
           <SearchInput />
           <PerPageSelector />
           <DifficultySelector />
+          <Sorting />
+          <ClearButton />
         </div>
         <RecipeList recipes={data} />
         <Pagination totalPages={totalPages} />

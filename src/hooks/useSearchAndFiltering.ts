@@ -10,7 +10,6 @@ type ReturnData = {
     key: string
   ) => (option: SingleValue<TSelectOption | null> | MultiValue<TSelectOption | null>) => void
   handleSearch: (key: string) => (e: ChangeEvent<HTMLInputElement>) => void
-  handlePageSet: (selectedPage: string) => void
 }
 
 const useSearchAndFiltering = (): ReturnData => {
@@ -70,21 +69,12 @@ const useSearchAndFiltering = (): ReturnData => {
 
       router.replace(`${pathname}?${params.toString()}`)
     },
-    [params]
-  )
-
-  const handlePageSet = useCallback(
-    (selectedPage: string) => {
-      params.set('page', selectedPage)
-      router.replace(`${pathname}?${params.toString()}`)
-    },
-    [params]
+    [params, pathname, router]
   )
 
   return {
     handleFiltering,
     handleSearch,
-    handlePageSet,
   }
 }
 

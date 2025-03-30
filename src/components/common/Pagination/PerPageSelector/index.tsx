@@ -29,7 +29,7 @@ const PerPageSelector: FC<PerPageSelectorProps> = ({ className = '' }) => {
   const currentValue = options.find((opt) => opt.value === +currentPage)
 
   return (
-    <div className={className}>
+    <div className={className} key={searchParams.toString()}>
       <label htmlFor="per-page" className="text-black-lighter mb-2 block text-sm font-medium">
         Items per page
       </label>

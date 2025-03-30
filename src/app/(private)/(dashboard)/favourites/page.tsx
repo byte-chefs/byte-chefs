@@ -1,5 +1,6 @@
 import { getFavouritesRecipes } from '@/actions/recipes/getFavouritesRecipes'
 import { getAllTags } from '@/actions/tags/getAllTags'
+import ClearButton from '@/components/common/ClearButton'
 import Pagination from '@/components/common/Pagination'
 import PerPageSelector from '@/components/common/Pagination/PerPageSelector'
 import SearchInput from '@/components/common/Search'
@@ -22,6 +23,7 @@ export default async function FavouritesEditPage(props: TProps) {
         <PerPageSelector />
         <TagsSelector tags={tags} />
         <DifficultySelector />
+        <ClearButton />
       </div>
       <RecipeList recipes={data} />
       <Pagination totalPages={totalPages} />

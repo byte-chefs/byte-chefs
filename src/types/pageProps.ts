@@ -1,11 +1,9 @@
-export type TSortParam = 'asc' | 'desc'
+export type TSortParam = 'asc' | 'desc' | 'newest' | 'oldest'
 
 export type TSearchParams = {
   page?: number
   perPage?: number
-  sortBytitle?: TSortParam
-  sortByupdatedat?: TSortParam
-  sortBycreatedat?: TSortParam
+  sortBy?: TSortParam
   search?: string
   tags?: string
   foodToInclude?: Array<string>
