@@ -10,12 +10,38 @@ export const getUserRecipes = cache(async (searchParams: Promise<TSearchParams>)
 
   if (!user) throw new Error('User is not authenticated')
 
-  const { page, perPage } = await searchParams
+  const { page, perPage, tags, difficultyLevel, search } = await searchParams
 
   try {
-    const { data, totalPages } = await getPaginatedData('recipe', page, perPage, {
-      userId: user.id,
-    })
+    const tagIds = tags
+      ?.split(';')
+      .map((id) => parseInt(id))
+      .filter(Boolean)
+
+    const where: Record<string, unknown> = {}
+
+    if (tagIds?.length) {
+      where.tags = {
+        some: {
+          tagId: { in: tagIds },
+        },
+      }
+    }
+
+    if (difficultyLevel) {
+      where.difficulty = difficultyLevel
+    }
+
+    if (search) {
+      where.name = {
+        contains: search,
+        mode: 'insensitive',
+      }
+    }
+
+    where.userId = user.id
+
+    const { data, totalPages } = await getPaginatedData('recipe', page, perPage, where)
 
     return { data, totalPages }
   } catch (error) {

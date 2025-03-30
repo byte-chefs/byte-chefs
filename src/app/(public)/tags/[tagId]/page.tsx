@@ -5,6 +5,8 @@ import Pagination from '@/components/common/Pagination'
 import PerPageSelector from '@/components/common/Pagination/PerPageSelector'
 import { TSearchParams } from '@/types/pageProps'
 import { getTagById } from '@/actions/tags/getTagById'
+import SearchInput from '@/components/common/Search'
+import DifficultySelector from '@/components/common/Selectors/DifficultySelector'
 
 export default async function RecipePage({
   params,
@@ -30,7 +32,11 @@ export default async function RecipePage({
     <main className="w-full">
       <div className="mx-auto max-w-[1092px] px-4 py-6 md:px-6">
         <h2 className="mb-8 text-center font-bold md:mb-12">{tag.name}</h2>
-        <PerPageSelector />
+        <div className="mb-8 flex flex-col gap-2 md:flex-row md:gap-5">
+          <SearchInput />
+          <PerPageSelector />
+          <DifficultySelector />
+        </div>
         <RecipeList recipes={data} />
         <Pagination totalPages={totalPages} />
       </div>

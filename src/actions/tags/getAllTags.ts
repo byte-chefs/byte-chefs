@@ -5,10 +5,19 @@ import { TSearchParams } from '@/types/pageProps'
 import getPaginatedData from '../heplers/getPaginatedData'
 
 export const getAllTags = cache(async (searchParams: Promise<TSearchParams>) => {
-  const { page, perPage } = await searchParams
+  const { page, perPage, search } = await searchParams
 
   try {
-    const { data, totalPages } = await getPaginatedData('tag', page, perPage)
+    const where: Record<string, unknown> = {}
+
+    if (search) {
+      where.name = {
+        contains: search,
+        mode: 'insensitive',
+      }
+    }
+
+    const { data, totalPages } = await getPaginatedData('tag', page, perPage, where)
 
     return { data, totalPages }
   } catch (error) {

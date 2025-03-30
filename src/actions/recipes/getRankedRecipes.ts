@@ -5,23 +5,42 @@ import { TSearchParams } from '@/types/pageProps'
 import getPaginatedData from '../heplers/getPaginatedData'
 
 export const getRankedRecipes = cache(async (searchParams: Promise<TSearchParams>) => {
-  const { page, perPage } = await searchParams
+  const { page, perPage, tags, difficultyLevel, search } = await searchParams
 
   try {
-    const { data, totalPages } = await getPaginatedData(
-      'recipe',
-      page,
-      perPage,
-      {
-        favouritesTotal: {
-          gt: 0,
+    const tagIds = tags
+      ?.split(';')
+      .map((id) => parseInt(id))
+      .filter(Boolean)
+
+    const where: Record<string, unknown> = {}
+
+    where.favouritesTotal = {
+      gt: 0,
+    }
+
+    if (tagIds?.length) {
+      where.tags = {
+        some: {
+          tagId: { in: tagIds },
         },
-      },
-      undefined,
-      {
-        favouritesTotal: 'desc',
       }
-    )
+    }
+
+    if (difficultyLevel) {
+      where.difficulty = difficultyLevel
+    }
+
+    if (search) {
+      where.name = {
+        contains: search,
+        mode: 'insensitive',
+      }
+    }
+
+    const { data, totalPages } = await getPaginatedData('recipe', page, perPage, where, undefined, {
+      favouritesTotal: 'desc',
+    })
 
     return { data, totalPages }
   } catch (error) {
