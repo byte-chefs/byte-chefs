@@ -2,6 +2,7 @@ import { getRecipesByTag } from '@/actions/recipes/getRecipesByTag'
 import { getAllTags } from '@/actions/tags/getAllTags'
 import Pagination from '@/components/common/Pagination'
 import PerPageSelector from '@/components/common/Pagination/PerPageSelector'
+import SearchInput from '@/components/common/Search'
 import TagsList from '@/components/tags/TagsList'
 import { TProps } from '@/types/pageProps'
 import { Tag } from '@/types/tag'
@@ -26,7 +27,10 @@ export default async function TagsListingPage(props: TProps) {
     <main className="w-full">
       <div className="mx-auto max-w-[1092px] px-4 py-6 md:px-6">
         <h2 className="mb-8 text-center font-bold md:mb-12">Tags page</h2>
-        <PerPageSelector />
+        <div className="mb-8 flex flex-col gap-2 md:flex-row md:gap-5">
+          <SearchInput label="Search by tag" />
+          <PerPageSelector />
+        </div>
         <TagsList tags={tags} />
         <Pagination totalPages={totalPages} />
       </div>

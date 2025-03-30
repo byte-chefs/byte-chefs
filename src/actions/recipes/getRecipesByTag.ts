@@ -6,20 +6,31 @@ import getPaginatedData from '../heplers/getPaginatedData'
 
 export const getRecipesByTag = cache(
   async (searchParams: Promise<TSearchParams>, tagId: number) => {
-    const { page, perPage } = await searchParams
+    const { page, perPage, difficultyLevel, search } = await searchParams
 
     try {
-      const whereCondition = {
-        tags: {
-          some: {
-            tag: {
-              id: tagId,
-            },
+      const where: Record<string, unknown> = {}
+
+      where.tags = {
+        some: {
+          tag: {
+            id: tagId,
           },
         },
       }
 
-      const { data, totalPages } = await getPaginatedData('recipe', page, perPage, whereCondition)
+      if (difficultyLevel) {
+        where.difficulty = difficultyLevel
+      }
+
+      if (search) {
+        where.name = {
+          contains: search,
+          mode: 'insensitive',
+        }
+      }
+
+      const { data, totalPages } = await getPaginatedData('recipe', page, perPage, where)
 
       return { data, totalPages }
     } catch (error) {

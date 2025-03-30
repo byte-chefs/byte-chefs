@@ -3,6 +3,7 @@ import ROUTES from '@/app/constants/routes'
 
 export const publicHeaderNavItems = [
   { title: 'All Recipes', path: ROUTES.RECIPES },
+  { title: 'Tags', path: ROUTES.TAG },
   { title: 'Top Chart', path: ROUTES.RANK },
 ]
 

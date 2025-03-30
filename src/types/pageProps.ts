@@ -7,7 +7,7 @@ export type TSearchParams = {
   sortByupdatedat?: TSortParam
   sortBycreatedat?: TSortParam
   search?: string
-  tag?: string
+  tags?: string
   foodToInclude?: Array<string>
   foodToExclude?: Array<string>
   difficultyLevel?: string

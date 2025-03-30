@@ -3,14 +3,18 @@
 import { DEFAULT_PER_PAGE, PAGE_SIZES } from '@/app/constants/pagination'
 import useSearchAndFiltering from '@/hooks/useSearchAndFiltering'
 import { useSearchParams } from 'next/navigation'
-import React, { useMemo } from 'react'
+import React, { FC, useMemo } from 'react'
 import dynamic from 'next/dynamic'
 
 const ReactSelect = dynamic(() => import('react-select'), {
   ssr: false,
 })
 
-const PerPageSelector = () => {
+type PerPageSelectorProps = {
+  className?: string
+}
+
+const PerPageSelector: FC<PerPageSelectorProps> = ({ className = '' }) => {
   const { handleFiltering } = useSearchAndFiltering()
   const searchParams = useSearchParams()
   const currentPage = searchParams.get('perPage') || DEFAULT_PER_PAGE
@@ -25,7 +29,7 @@ const PerPageSelector = () => {
   const currentValue = options.find((opt) => opt.value === +currentPage)
 
   return (
-    <div className="mx-auto my-6 w-20">
+    <div className={className}>
       <label htmlFor="per-page" className="text-black-lighter mb-2 block text-sm font-medium">
         Items per page
       </label>
