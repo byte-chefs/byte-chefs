@@ -35,12 +35,10 @@ export const getAllRecipes = cache(async (searchParams: Promise<TSearchParams>) 
       }
     }
 
-    if (sortBy) {
-      if (sortBy === 'asc' || sortBy === 'desc') {
-        orderBy.name = sortBy
-      } else {
-        orderBy.createdAt = sortBy === 'newest' ? 'asc' : 'desc'
-      }
+    if (sortBy === 'asc' || sortBy === 'desc') {
+      orderBy.name = sortBy
+    } else {
+      orderBy.createdAt = !sortBy || sortBy === 'newest' ? 'desc' : 'asc'
     }
 
     const { data, totalPages } = await getPaginatedData(
