@@ -1,5 +1,4 @@
 import { getAllRecipes } from '@/actions/recipes/getAllRecipes'
-import { getAllTags } from '@/actions/tags/getAllTags'
 import Pagination from '@/components/common/Pagination'
 import PerPageSelector from '@/components/common/Pagination/PerPageSelector'
 import RecipeList from '@/components/recipes/RecipeList'
@@ -9,12 +8,13 @@ import TagsSelector from '@/components/common/Selectors/TagsSelector'
 import DifficultySelector from '@/components/common/Selectors/DifficultySelector'
 import Sorting from '@/components/common/Sortings/Sorting'
 import ClearButton from '@/components/common/ClearButton'
+import { getAllTags } from '@/lib/tags'
 
 export const revalidate = 60
 
 export default async function RecipesListingPage(props: TProps) {
   const { data, totalPages } = await getAllRecipes(props.searchParams || Promise.resolve({}))
-  const { data: tags } = await getAllTags(Promise.resolve({}))
+  const tags = await getAllTags()
 
   return (
     <main className="w-full flex-1">
