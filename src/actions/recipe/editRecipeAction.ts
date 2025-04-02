@@ -35,6 +35,15 @@ export const editRecipeAction = actionClient
         throw new Error('You do not have permission to edit this recipe')
       }
 
+      const recipeCalories = ingredients.reduce((acc, ingredient) => {
+        acc.calories += Number(ingredient.calories);
+        acc.protein += Number(ingredient.protein);
+        acc.carbs += Number(ingredient.carbs);
+        acc.fat += Number(ingredient.fat);
+
+        return acc;
+      }, { calories: 0, protein: 0, carbs: 0, fat: 0 })
+
       const existingIngredientIds = existingRecipe.ingredients.map((ingregient) => ingregient.id)
       const updatedIngredientIds = ingredients
         .filter((ingregient) => ingregient.id)
@@ -76,6 +85,10 @@ export const editRecipeAction = actionClient
             description,
             difficulty,
             photo,
+            calories: recipeCalories.calories || 0,
+            protein: recipeCalories.protein || 0,
+            carbs: recipeCalories.carbs || 0,
+            fat: recipeCalories.fat || 0,
             status,
             ...(tags && {
               tags: {
@@ -106,6 +119,10 @@ export const editRecipeAction = actionClient
                 servingId: ingredient.servingId,
                 quantity: ingredient.quantity,
                 name: ingredient.name,
+                calories: ingredient.calories,
+                protein: ingredient.protein,
+                carbs: ingredient.carbs,
+                fat: ingredient.fat,
               },
             })
           } else {
@@ -115,6 +132,10 @@ export const editRecipeAction = actionClient
                 servingId: ingredient.servingId,
                 quantity: ingredient.quantity,
                 name: ingredient.name,
+                calories: ingredient.calories,
+                protein: ingredient.protein,
+                carbs: ingredient.carbs,
+                fat: ingredient.fat,
                 recipeId: Number(id),
               },
             })

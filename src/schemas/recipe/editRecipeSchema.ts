@@ -18,6 +18,10 @@ export const editRecipeSchema = z.object({
         foodId: z.number(),
         servingId: z.number(),
         quantity: z.number(),
+        calories: z.number(),
+        protein: z.number(),
+        carbs: z.number(),
+        fat: z.number(),
         name: z.string(),
       })
     )
