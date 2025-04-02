@@ -1,5 +1,4 @@
 import { getFavouritesRecipes } from '@/actions/recipes/getFavouritesRecipes'
-import { getAllTags } from '@/actions/tags/getAllTags'
 import ClearButton from '@/components/common/ClearButton'
 import Pagination from '@/components/common/Pagination'
 import PerPageSelector from '@/components/common/Pagination/PerPageSelector'
@@ -7,13 +6,14 @@ import SearchInput from '@/components/common/Search'
 import DifficultySelector from '@/components/common/Selectors/DifficultySelector'
 import TagsSelector from '@/components/common/Selectors/TagsSelector'
 import RecipeList from '@/components/recipes/RecipeList'
+import { getAllTags } from '@/lib/tags'
 import { TProps } from '@/types/pageProps'
 
 export const revalidate = 60
 
 export default async function FavouritesEditPage(props: TProps) {
   const { data, totalPages } = await getFavouritesRecipes(props.searchParams || Promise.resolve({}))
-  const { data: tags } = await getAllTags(Promise.resolve({}))
+  const tags = await getAllTags()
 
   return (
     <>
