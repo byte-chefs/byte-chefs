@@ -6,9 +6,13 @@ import { Ingredient, Tag } from '@/types'
 type WhatsInsideSectionProps = {
   ingredients: Ingredient[]
   tags: Tag[]
+  calories?: number
+  protein?: number
+  fat?: number
+  carbs?: number
 }
 
-const WhatsInsideSection: FC<WhatsInsideSectionProps> = ({ ingredients, tags }) => {
+const WhatsInsideSection: FC<WhatsInsideSectionProps> = ({ ingredients, tags, fat, protein, carbs, calories }) => {
   return (
     <section className="bg-black-lightest relative px-6 pt-8 pb-14 md:px-16 lg:px-24 lg:pt-24 lg:pb-40">
       <div className="mx-auto max-w-6xl text-center">
@@ -39,22 +43,22 @@ const WhatsInsideSection: FC<WhatsInsideSectionProps> = ({ ingredients, tags }) 
 
           <div className="mt-14 w-full lg:mt-0 lg:ml-12 lg:w-3/7">
             <div className="grid grid-cols-4 text-center lg:text-left">
-              <div>
-                <p className="text-md">Calories</p>
-                <h3 className="text-primary-lighter font-bold">831</h3>
-              </div>
-              <div>
-                <p className="text-md">Carbs (g)</p>
-                <h3 className="text-primary-lighter font-bold">35.3</h3>
-              </div>
-              <div>
-                <p className="text-md">Fat (g)</p>
-                <h3 className="text-primary-lighter font-bold">52.4</h3>
-              </div>
-              <div>
-                <p className="text-md">Protein (g)</p>
-                <h3 className="text-primary-lighter font-bold">41.1</h3>
-              </div>
+                <div>
+                  <p className="text-md">Calories</p>
+                  <h3 className="text-primary-lighter font-bold">{calories || 0}</h3>
+                </div>
+                <div>
+                  <p className="text-md">Carbs (g)</p>
+                  <h3 className="text-primary-lighter font-bold">{carbs || 0}</h3>
+                </div>
+                <div>
+                  <p className="text-md">Fat (g)</p>
+                  <h3 className="text-primary-lighter font-bold">{fat || 0}</h3>
+                </div>
+                <div>
+                  <p className="text-md">Protein (g)</p>
+                  <h3 className="text-primary-lighter font-bold">{protein || 0}</h3>
+                </div>
             </div>
 
             <div className="mt-7 lg:mt-14">

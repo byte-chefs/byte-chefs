@@ -15,10 +15,18 @@ export const createRecipeAction = actionClient
     const { name, cookingTime, description, difficulty, ingredients, status, tags, photo } =
       parsedInput
     const user = await getAuthUserInfo()
-
     if (!user) {
       throw new Error('User is not authenticated')
     }
+
+    const recipeCalories = ingredients.reduce((acc, ingredient) => {
+      acc.calories += ingredient.calories;
+      acc.protein += ingredient.protein;
+      acc.carbs += ingredient.carbs;
+      acc.fat += ingredient.fat;
+
+      return acc;
+    }, { calories: 0, protein: 0, carbs: 0, fat: 0 })
 
     try {
       const recipe = await prisma.recipe.create({
@@ -29,6 +37,10 @@ export const createRecipeAction = actionClient
           photo,
           difficulty,
           status: status,
+          calories: recipeCalories.calories || 0,
+          protein: recipeCalories.protein || 0,
+          carbs: recipeCalories.carbs || 0,
+          fat: recipeCalories.fat || 0,
           userId: user.id,
           ingredients: {
             create: ingredients.map((ingredient) => ({
@@ -36,6 +48,10 @@ export const createRecipeAction = actionClient
               servingId: ingredient.servingId,
               quantity: ingredient.quantity,
               name: ingredient.name,
+              calories: ingredient.calories,
+              protein: ingredient.protein,
+              carbs: ingredient.carbs,
+              fat: ingredient.fat,
             })),
           },
           ...(tags &&

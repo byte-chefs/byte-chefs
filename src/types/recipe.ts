@@ -6,18 +6,25 @@ export type Recipe = {
   updatedAt: Date
   photo: string | null
   cookingTime: number
-  calories: number | null
   favouritesTotal: number
   personServing: number
   difficulty: string | null
   status: string
   userId: number
+  calories: number
+  protein: number
+  fat: number
+  carbs: number
 }
 
 export type Ingredient = {
   id?: number
   recipeId?: number
   name?: string | null
+  calories: number
+  protein: number
+  fat: number
+  carbs: number
   foodId?: number
   quantity?: number
   servingId?: number
